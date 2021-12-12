@@ -1,0 +1,38 @@
+@font-face {
+    font-family: IRANSans-M;
+    src: url(/fonts/IRANSans\(FaNum\)_Medium.ttf);
+  }
+@font-face {
+    font-family:IRANSans-B ;
+    src: url(fonts/IRANSans\(FaNum\)_Bold.ttf);
+}
+body{
+    height: 100%;
+    background:#eee;
+}
+.txt{
+    direction: rtl;
+    text-align: right;
+    font-family: IRANSans-B;
+    margin-left: 30px;
+}
+#banner{
+    display: flex;
+    background-image: linear-gradient(rgb(61, 61, 61),rgb(199, 199, 199));
+    padding: 3px 20px 3px 20px;
+    color: azure;
+    text-shadow: 2px 2px 3px #000;
+    font-size: 1.5rem;
+    justify-content: center;
+    position: relative;
+    box-shadow: 2px 2px 3px #000;
+    border-radius: 5px;
+}
+#time{
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgb(197, 49, 49);
+    font-size: 1.4rem;
+    -webkit-text-stroke: 0.8pt rgb(155, 0, 0);
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    position: absolute;top: 3px;left:0;
+}
