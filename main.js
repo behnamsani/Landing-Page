@@ -4,10 +4,12 @@ const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
 const selectYear = document.querySelector("#selectYear");
 const ok = document.querySelector("#ok");
+const btnDate = document.querySelector("#btnDate");
+const btnClose = document.querySelector("#close");
 
-setTimeout( ()=>{
-    boxDate.style.display="flex";
-},1000);
+// setTimeout( ()=>{
+//     boxDate.style.display="flex";
+// },1000);
 
 const date = new Date();
 const monthArr=[1,-2,1,0,1,0,1,1,0,1,0,1];
@@ -17,12 +19,10 @@ const nowYear = date.getFullYear();
 const nowMonth = date.getMonth()+1;
 const nowDay = date.getDate();
 console.log(nowDay,nowMonth,nowYear);
-
-// let target = prompt("تاریخ مورد نظز را وارد نمایید :");
-// target=target.split("-");
-
 let targetDate=[nowDay,nowMonth,nowYear];
-console.log(selectDay);
+
+
+
 ok.addEventListener("click",()=>{
     const tDay = selectDay.value;
     const tMonth = selectMonth.value;
@@ -33,6 +33,12 @@ ok.addEventListener("click",()=>{
     console.log(parseInt(targetDate[0]),parseInt(targetDate[1]),parseInt(targetDate[2]));
     const targetTime="";
     timer();
+})
+btnDate.addEventListener("click",()=>{
+    boxDate.style.display="flex";
+})
+btnClose.addEventListener("click",()=>{
+    boxDate.style.display="none";
 })
 
 
