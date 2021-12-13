@@ -36,3 +36,43 @@ body{
     -webkit-text-fill-color: rgb(255, 255, 255);
     position: absolute;top: 3px;left:0;
 }
+#arrivalDate{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background:rgb(0, 0, 0);
+    width: 300px;
+    height:200px;
+    position:absolute;
+    top:0;bottom: 0;left:0;right: 0;
+    margin:auto;
+    border-radius: 8px;
+    opacity: 0.5;
+}
+#ok{
+    margin-left: 8px;
+}
+#sectionDate{
+    display: block;
+}
+#selectMonth{
+    margin: 0 10px;
+}
+#labelPart1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: azure;
+    font-family: IRANSans-M;
+    position: relative;
+}
+#first{
+    right: 24px !important;
+}
+
+#part1{
+    display: flex;
+}
+label{
+    position: relative;right: 65px;
+}

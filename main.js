@@ -1,4 +1,14 @@
 const time = document.querySelector("#time");
+const boxDate = document.querySelector("#arrivalDate");
+const selectDay = document.querySelector("#selectDay");
+const selectMonth = document.querySelector("#selectMonth");
+const selectYear = document.querySelector("#selectYear");
+const ok = document.querySelector("#ok");
+
+setTimeout( ()=>{
+    boxDate.style.display="flex";
+},1000);
+
 const date = new Date();
 const monthArr=[1,-2,1,0,1,0,1,1,0,1,0,1];
 
@@ -8,11 +18,23 @@ const nowMonth = date.getMonth()+1;
 const nowDay = date.getDate();
 console.log(nowDay,nowMonth,nowYear);
 
-let target = prompt("تاریخ مورد نظز را وارد نمایید :");
-target=target.split("-");
-const targetDate = target[0].split(".");
-console.log(parseInt(targetDate[0]),parseInt(targetDate[1]),parseInt(targetDate[2]));
-const targetTime = target[1].split(".");
+// let target = prompt("تاریخ مورد نظز را وارد نمایید :");
+// target=target.split("-");
+
+let targetDate=[nowDay,nowMonth,nowYear];
+console.log(selectDay);
+ok.addEventListener("click",()=>{
+    const tDay = selectDay.value;
+    const tMonth = selectMonth.value;
+    const tYear = selectYear.value;
+    targetDate = [tDay,tMonth,tYear];
+    console.log(targetDate);
+    console.log(targetDate[0],targetDate[1],targetDate[2]);
+    console.log(parseInt(targetDate[0]),parseInt(targetDate[1]),parseInt(targetDate[2]));
+    const targetTime="";
+    timer();
+})
+
 
 let dayLeft=0;
 
@@ -63,30 +85,63 @@ function timeLeft(day){
             }
             if(nowDay === parseInt(day[0])){
                 dayLeft = res;
+                if(daysYear>365){
+                    let mx=365-dayLeft;
+                    dayLeft=daysYear-mx;
+                }
             }
             if(nowDay < parseInt(day[0])){
                 daysLeft(targetDate);
                 dayLeft=res+dayLeft;
+                if(daysYear>365){
+                    let mx=365-dayLeft;
+                    dayLeft=daysYear-mx;
+                }
             }
             if(nowDay > parseInt(day[0])){
                 daysLeft(targetDate);
-                if(monthArr[parseInt(day[1])-2] === 1){
+                console.log(dayLeft);
+                console.log(res);
+                console.log(daysYear);
+                let mx = parseInt(day[1])-2;
+                if(mx === -1){
+                    mx = 11;
+                }
+                if(monthArr[mx] === 1){
                     dayLeft=(res-31)+dayLeft;
+                    if(daysYear>365){
+                        let mx=365-dayLeft;
+                        dayLeft=daysYear-mx;
+                    }
                 }
-                if(monthArr[parseInt(day[1])-2]===-2){
+                if(monthArr[mx]===-2){
                     dayLeft=(res-28)+dayLeft;
+                    if(daysYear>365){
+                        let mx=365-dayLeft;
+                        dayLeft=daysYear-mx;
+                    }
                 }
-                if(monthArr[parseInt(day[1])-2]===0){
+                if(monthArr[mx]===0){
                     dayLeft=(res-30)+dayLeft;
+                    if(daysYear>365){
+                        let mx=365-dayLeft;
+                        dayLeft=daysYear-mx;
+                    }
                 }
             }
 
         }else if(nowMonth === parseInt(day[1])){
             daysLeft(targetDate);
-            dayLeft = daysYear-dayLeft;
+            if(nowDay > parseInt(day[0])){
+                dayLeft = daysYear-dayLeft;
+            }
+            if(nowDay <= parseInt(day[0])){
+                dayLeft=daysYear+dayLeft;
+            }
         }else if(nowMonth < parseInt(day[1])){
             monthHeigh(targetDate);
             dayLeft = dayLeft+daysYear;
+            
         }    
        
     }
@@ -106,6 +161,9 @@ function daysLeft(day){
 
         let temp =nowMonth-1;
         let temp2 =parseInt(day[1])-2;
+        if(temp2 === -1){
+            temp2=11;
+        }
         if(nowMonth > parseInt(day[1])){
             if(monthArr[temp2]===1){
                 dayLeft = ((31-nowDay)+parseInt(day[0]));
@@ -180,4 +238,4 @@ function monthHeigh(day){
             }
 }
 
-timer();
+
