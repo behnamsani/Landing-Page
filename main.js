@@ -66,7 +66,7 @@ function timeLeft(day){
             let temp = nowMonth - parseInt(day[1]);
             temp=12-temp;
             let j =1;
-            let i= nowMonth
+            let i= nowMonth-1
             for(j;j<=temp;j++){
                 if(i>11){
                     i=0;
