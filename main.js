@@ -7,44 +7,54 @@ const ok = document.querySelector("#ok");
 const btnDate = document.querySelector("#btnDate");
 const btnClose = document.querySelector("#close");
 
-// setTimeout( ()=>{
-//     boxDate.style.display="flex";
-// },1000);
-
 const date = new Date();
 const monthArr=[1,-2,1,0,1,0,1,1,0,1,0,1];
-
 const nowYear = date.getFullYear();
-// const nowMonth = 8;
 const nowMonth = date.getMonth()+1;
 const nowDay = date.getDate();
-console.log(nowDay,nowMonth,nowYear);
+
+const nowHours = date.getHours();
+const nowMinutes = date.getMinutes();
+const nowSeconds = date.getSeconds();
+
+let dayLeft=0;
 let targetDate=[nowDay,nowMonth,nowYear];
-
-
+let targetTime="";
+console.log(nowDay,nowMonth,nowYear);
+console.log(nowHours,nowMinutes,nowSeconds);
 
 ok.addEventListener("click",()=>{
     const tDay = selectDay.value;
     const tMonth = selectMonth.value;
     const tYear = selectYear.value;
     targetDate = [tDay,tMonth,tYear];
-    console.log(targetDate);
-    console.log(targetDate[0],targetDate[1],targetDate[2]);
-    console.log(parseInt(targetDate[0]),parseInt(targetDate[1]),parseInt(targetDate[2]));
-    const targetTime="";
     timer();
-})
+});
 btnDate.addEventListener("click",()=>{
-    boxDate.style.display="flex";
-})
+    boxDate.style.display="block";
+    let opacity = 0;
+    for(let i=0;i<=1000;i++){
+        setTimeout(()=>{
+            opacity=opacity+0.0005;
+            boxDate.style.opacity=opacity.toString();
+        },10);
+    }
+});
 btnClose.addEventListener("click",()=>{
-    boxDate.style.display="none";
-})
+    let opacity = 0.5;
+    for(let i=0;i<=1000;i++){
+        setTimeout(()=>{
+            opacity=opacity-0.0005;
+            boxDate.style.opacity=opacity.toString();
+        },10);
+    }
+    setTimeout(()=>{
+        boxDate.style.display="none";
+    },300);
+    
+});
 
 
-let dayLeft=0;
-
-//1.5.2022-12.12.12
 function timeLeft(day){
 
     if( nowYear > parseInt(day[2])){//----------------------------------------------------------
@@ -106,9 +116,6 @@ function timeLeft(day){
             }
             if(nowDay > parseInt(day[0])){
                 daysLeft(targetDate);
-                console.log(dayLeft);
-                console.log(res);
-                console.log(daysYear);
                 let mx = parseInt(day[1])-2;
                 if(mx === -1){
                     mx = 11;

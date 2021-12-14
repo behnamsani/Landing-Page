@@ -9,6 +9,7 @@
 body{
     height: 100%;
     background:#eee;
+    margin: 0;
 }
 .txt{
     direction: rtl;
@@ -27,7 +28,6 @@ body{
     justify-content: center;
     position: relative;
     box-shadow: 2px 2px 3px #000;
-    border-radius: 5px;
 }
 #time{
     color: rgb(255, 255, 255);
@@ -39,8 +39,7 @@ body{
 }
 #arrivalDate{
     display: none;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     background:rgb(0, 0, 0);
     width: 300px;
     height:200px;
@@ -48,16 +47,23 @@ body{
     top:0;bottom: 0;left:0;right: 0;
     margin:auto;
     border-radius: 8px;
-    opacity: 0.5;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 }
+
 #ok{
-    margin-left: 8px;
+    margin: 20px 20px;
+    width: 120px;
+
 }
 #sectionDate{
     display: block;
 }
 #selectMonth{
     margin: 0 10px;
+}
+#selectYear{
+    border-radius: 8px;
 }
 #labelPart1{
     display: flex;
@@ -68,15 +74,22 @@ body{
     position: relative;
 }
 #first{
-    right: 24px !important;
+    right: 24px;
 }
+#second{
+    position: relative;
+    right: 50px;
+}
+#three{
+    position: relative;
+    right: 45px;
+} 
 
 #part1{
     display: flex;
+    justify-content: center;
 }
-label{
-    position: relative;right: 65px;
-}
+
 #btnDate{
     position: absolute;right:0;top: 0;bottom: 0;
     margin:auto;
@@ -86,6 +99,7 @@ label{
     color:antiquewhite;
     font-family: IRANSans-M;
     border-radius: 8px;
+    cursor: pointer;
 }
 #btnDate:hover{
     background-image: linear-gradient(rgb(48, 47, 47),rgb(216, 216, 216));
@@ -93,4 +107,30 @@ label{
 #close{
     position:absolute; right:8px; top: 8px;
     color:red;
+    cursor: pointer;
+}
+#sectionTime{
+    display: block;
+}
+#labelPart2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: azure;
+    font-family: IRANSans-M;
+    position: relative;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+#part2{
+    display: flex;
+    justify-content: center;
+}
+#master{
+    margin-top: 30px;
+}
+.inputEnter{
+    width: 80px;
+    margin: 0 20px;
+    border-radius: 8px;
 }

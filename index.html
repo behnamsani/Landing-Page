@@ -12,77 +12,89 @@
     <div id="main">
         
         <div id="arrivalDate">
-            <button id="close">×</button>
-            <div id="sectionDate">
-                <div id="labelPart1">
-                    <label id="first">روز</label>
-                    <label >ماه</label>
-                    <label >سال</label>
-                </div>
-                <div id="part1">
 
-                    <select id="selectDay">
+            <div id="master">
+                <button id="close">×</button>
+                <div id="sectionDate">
 
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15" selected >15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
+                    <div id="labelPart1">
+                        <label id="first">روز</label>
+                        <label id="second">ماه</label>
+                        <label id="three">سال</label>
+                    </div>
+                    <div id="part1">
 
-                    </select>
-                    <select id="selectMonth">
+                        <select id="selectDay">
 
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15" selected >15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
 
-                    </select>
-                    <input id="selectYear" type="text" placeholder="2021">
-                
-                    <div>
-                        <button id="ok">ok</button>
+                        </select>
+                        <select id="selectMonth">
+
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+
+                        </select>
+                        <input id="selectYear" type="text" placeholder="2021">
+                    
                     </div>
 
                 </div>
+                <div id="sectionTime">
 
-            </div>
-            <div id="sectionTime">
+                    <div id="labelPart2">
+                        <label for="" id="setHours">ساعت</label>
+                        <label for="" id="setMinutes">دقیقه</label>
+                    </div>
+                    <div id="part2">
+                        <input id="hours" class="inputEnter" type="datetime" placeholder="1-23">
+                        <input id="minutes" class="inputEnter" type="datetime" placeholder="1-59">
+                    </div>
 
+                </div>
+                <div>
+                    <button id="ok">ok</button>
+                </div>
             </div>
             
         </div>
