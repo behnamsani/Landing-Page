@@ -3,6 +3,10 @@ const boxDate = document.querySelector("#arrivalDate");
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
 const selectYear = document.querySelector("#selectYear");
+
+const selectHours = document.querySelector("#hours");
+const selectMinutes = document.querySelector("#minutes");
+
 const ok = document.querySelector("#ok");
 const btnDate = document.querySelector("#btnDate");
 const btnClose = document.querySelector("#close");
@@ -18,8 +22,10 @@ const nowMinutes = date.getMinutes();
 const nowSeconds = date.getSeconds();
 
 let dayLeft=0;
+let minutesLeft=0;
+let hoursLeft=0;
 let targetDate=[nowDay,nowMonth,nowYear];
-let targetTime="";
+let targetTime=[nowHours,nowMinutes,nowSeconds];
 console.log(nowDay,nowMonth,nowYear);
 console.log(nowHours,nowMinutes,nowSeconds);
 
@@ -27,7 +33,13 @@ ok.addEventListener("click",()=>{
     const tDay = selectDay.value;
     const tMonth = selectMonth.value;
     const tYear = selectYear.value;
+
+    const tHours =parseInt(selectHours.value);
+    const tMinutes =parseInt(selectMinutes.value);
+    const tSeconds = nowSeconds;
     targetDate = [tDay,tMonth,tYear];
+    targetTime = [tHours,tMinutes,tSeconds];
+    console.log(targetDate,targetTime);
     timer();
 });
 btnDate.addEventListener("click",()=>{
@@ -158,14 +170,35 @@ function timeLeft(day){
         }    
        
     }
+
+    hoursMinutes(targetTime);
+
+    if(nowHours> targetTime[0]){
+        dayLeft=dayLeft-1;
+    }
+    if((nowHours===targetTime[0]&&nowMinutes>targetTime[1])){
+        dayLeft=dayLeft-1;
+    }
+
+    if(minutesLeft<10&&hoursLeft<10){
+        time.innerHTML=`${nowSeconds} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(minutesLeft<10){
+        time.innerHTML=`${nowSeconds} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(hoursLeft<10){
+        time.innerHTML=`${nowSeconds} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    }else {
+        time.innerHTML=`${nowSeconds} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+   }
+
     
-    time.innerHTML=`33 : 48 : 09   -   ${dayLeft} روز `;
 
 }
 
 function timer(){
    
     timeLeft(targetDate);
+    
+
 }
 
 function daysLeft(day){
@@ -251,4 +284,39 @@ function monthHeigh(day){
             }
 }
 
+function hoursMinutes(time){
+    if(nowMinutes > time[1]){
+        minutesLeft= nowMinutes-time[1];
+        minutesLeft= 60 - minutesLeft;
+    }
+    if(nowMinutes <= time[1]){
+        minutesLeft=time[1]-nowMinutes;
+        console.log(minutesLeft);
+    }
+
+
+    if(nowHours > time[0]&&nowMinutes>time[1]){
+        hoursLeft=(nowHours-time[0])+1;
+        hoursLeft=24-hoursLeft;
+    }
+    if(nowHours > time[0]&&nowMinutes<=time[1]){
+        hoursLeft=(nowHours-time[0]);
+        hoursLeft=24-hoursLeft;
+    }
+
+    if(nowHours === time[0]&&nowMinutes>time[1]){
+        hoursLeft=24-1;
+    }
+    if(nowHours === time[0]&&nowMinutes<=time[1]){
+        hoursLeft=0;
+    }
+
+    if(nowHours < time[0]&&nowMinutes>time[1]){
+        hoursLeft=(time[0]-nowHours)-1;
+    }
+    if(nowHours < time[0]&&nowMinutes<=time[1]){
+        hoursLeft=(time[0]-nowHours);
+    }
+
+}
 
