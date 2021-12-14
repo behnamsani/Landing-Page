@@ -22,6 +22,7 @@ const nowMinutes = date.getMinutes();
 const nowSeconds = date.getSeconds();
 
 let dayLeft=0;
+let secondLeft=nowSeconds;
 let minutesLeft=0;
 let hoursLeft=0;
 let targetDate=[nowDay,nowMonth,nowYear];
@@ -36,10 +37,10 @@ ok.addEventListener("click",()=>{
 
     const tHours =parseInt(selectHours.value);
     const tMinutes =parseInt(selectMinutes.value);
-    const tSeconds = nowSeconds;
     targetDate = [tDay,tMonth,tYear];
-    targetTime = [tHours,tMinutes,tSeconds];
+    targetTime = [tHours,tMinutes,secondLeft];
     console.log(targetDate,targetTime);
+    timeLeft(targetDate);
     timer();
 });
 btnDate.addEventListener("click",()=>{
@@ -179,26 +180,134 @@ function timeLeft(day){
     if((nowHours===targetTime[0]&&nowMinutes>targetTime[1])){
         dayLeft=dayLeft-1;
     }
-
-    if(minutesLeft<10&&hoursLeft<10){
-        time.innerHTML=`${nowSeconds} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+        time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(secondLeft<10&&minutesLeft<10){
+        time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(secondLeft<10&&hoursLeft<10){
+        time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(minutesLeft<10&&hoursLeft<10){
+        time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+    }else if(secondLeft<10){
+        time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
     }else if(minutesLeft<10){
-        time.innerHTML=`${nowSeconds} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+        time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
     }else if(hoursLeft<10){
-        time.innerHTML=`${nowSeconds} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+        time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
     }else {
-        time.innerHTML=`${nowSeconds} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
-   }
+        time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+    }
 
     
 
 }
 
 function timer(){
-   
-    timeLeft(targetDate);
-    
 
+    const decSecond=setInterval(()=>{
+        secondLeft=secondLeft-1;
+        if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+            time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(secondLeft<10&&minutesLeft<10){
+            time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(secondLeft<10&&hoursLeft<10){
+            time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(minutesLeft<10&&hoursLeft<10){
+            time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(secondLeft<10){
+            time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(minutesLeft<10){
+            time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+        }else if(hoursLeft<10){
+            time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+        }else {
+            time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+        }
+        if(secondLeft===0){
+            secondLeft=59;
+            minutesLeft=minutesLeft-1;
+            if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+                time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(secondLeft<10&&minutesLeft<10){
+                time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(secondLeft<10&&hoursLeft<10){
+                time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(minutesLeft<10&&hoursLeft<10){
+                time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(secondLeft<10){
+                time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(minutesLeft<10){
+                time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+            }else if(hoursLeft<10){
+                time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+            }else {
+                time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+            }
+            if(minutesLeft===0){
+                minutesLeft=59;
+                hoursLeft=hoursLeft-1;
+                if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+                    time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(secondLeft<10&&minutesLeft<10){
+                    time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(secondLeft<10&&hoursLeft<10){
+                    time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(minutesLeft<10&&hoursLeft<10){
+                    time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(secondLeft<10){
+                    time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(minutesLeft<10){
+                    time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                }else if(hoursLeft<10){
+                    time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                }else {
+                    time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                }
+                if(hoursLeft===0){
+                    hoursLeft=23;
+                    dayLeft=dayLeft-1;
+                    if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+                        time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(secondLeft<10&&minutesLeft<10){
+                        time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(secondLeft<10&&hoursLeft<10){
+                        time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(minutesLeft<10&&hoursLeft<10){
+                        time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(secondLeft<10){
+                        time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(minutesLeft<10){
+                        time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                    }else if(hoursLeft<10){
+                        time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                    }else {
+                        time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                    }
+                    if(dayLeft===0){
+                        clearInterval(decSecond);
+                        if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
+                            time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(secondLeft<10&&minutesLeft<10){
+                            time.innerHTML=`0${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(secondLeft<10&&hoursLeft<10){
+                            time.innerHTML=`0${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(minutesLeft<10&&hoursLeft<10){
+                            time.innerHTML=`${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(secondLeft<10){
+                            time.innerHTML=`0${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(minutesLeft<10){
+                            time.innerHTML=`${secondLeft} : 0${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                        }else if(hoursLeft<10){
+                            time.innerHTML=`${secondLeft} : ${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
+                        }else {
+                            time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    },1000);
 }
 
 function daysLeft(day){
@@ -319,4 +428,5 @@ function hoursMinutes(time){
     }
 
 }
+
 
