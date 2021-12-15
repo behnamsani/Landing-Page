@@ -1,5 +1,8 @@
 const time = document.querySelector("#time");
 const boxDate = document.querySelector("#arrivalDate");
+const banner = document.querySelector("#banner");
+const iconClock = document.querySelector("#iconClock");
+
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
 const selectYear = document.querySelector("#selectYear");
@@ -21,18 +24,59 @@ const nowHours = date.getHours();
 const nowMinutes = date.getMinutes();
 const nowSeconds = date.getSeconds();
 
+const pTag = document.createElement("p");
+pTag.id="clock";
+
 let dayLeft=0;
 let secondLeft=nowSeconds;
+let secondPlus=nowSeconds;
 let minutesLeft=0;
+let minutesPlus= nowMinutes;
 let hoursLeft=0;
+let hoursPlus=nowHours;
 let targetDate=[nowDay,nowMonth,nowYear];
 let targetTime=[nowHours,nowMinutes,nowSeconds];
 let decSecond;
+
+
+
 console.log(nowDay,nowMonth,nowYear);
 console.log(nowHours,nowMinutes,nowSeconds);
 
+let watch;
+let watch2;
+let nowClock = clock();
+
+iconClock.style.display="none";
+iconClock.addEventListener("mouseover",()=>{
+    setTimeout(()=>{
+
+        pTag.style.display="block";
+        iconClock.style.display="none";
+        setTimeout(()=>{
+            pTag.style.display="none";
+            iconClock.style.opacity="1";
+            iconClock.style.display="block";
+            setTimeout(()=>{
+                iconClock.style.opacity="0.4";
+            },1000);
+        },5000);
+
+    },300);
+});
 ok.addEventListener("click",()=>{
+    clearInterval(watch);
+    clearInterval(watch2);
     clearInterval(decSecond);
+    time.style.webkitTextStroke=" 0.8pt rgb(155, 0, 0)";
+    iconClock.style.display="block";
+    setTimeout(()=>{
+        iconClock.style.opacity="0.4";
+    },1000);
+
+    watch2 = clock2();
+    banner.appendChild(pTag);
+
     const tDay = selectDay.value;
     const tMonth = selectMonth.value;
     const tYear = selectYear.value;
@@ -430,5 +474,57 @@ function hoursMinutes(time){
     }
 
 }
+function clock(){
+    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    time.style.webkitTextStroke=" 0.8pt rgb(92, 56, 255)";
+clearInterval(watch);
+watch = setInterval(()=>{
+    secondPlus=secondPlus+1;
+    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    if(secondPlus>59){
+        secondPlus=0;
+        minutesPlus=minutesPlus+1;
+        time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        if(minutesPlus>59){
+            minutesPlus=0;
+            hoursPlus=hoursPlus+1;
+            time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            if(hoursPlus>23){
+                hoursPlus=0;
+                time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }
+        }
 
+    }
+
+},1000);
+}
+ function clock2(){
+    
+    pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    pTag.style.webkitTextStroke=" 0.4pt rgb(92, 56, 255)";
+    pTag.style.webkitTextFillColor="#fff";
+    clearInterval(watch);
+    watch = setInterval(()=>{
+    secondPlus=secondPlus+1;
+    pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    if(secondPlus>59){
+        secondPlus=0;
+        minutesPlus=minutesPlus+1;
+        pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        if(minutesPlus>59){
+            minutesPlus=0;
+            hoursPlus=hoursPlus+1;
+            pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            if(hoursPlus>23){
+                hoursPlus=0;
+                pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }
+        }
+
+    }
+
+    },1000);
+    
+}
 

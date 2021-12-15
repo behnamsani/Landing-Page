@@ -134,3 +134,28 @@ body{
     margin: 0 20px;
     border-radius: 8px;
 }
+#clock{
+    position: absolute;
+    top: 95px;
+    z-index: 5;
+    left: 25px;
+    margin: auto;
+    width: 217px;
+    font-size: 0.85rem;
+    font-family: IRANSans-M;
+    direction: rtl;
+    opacity: 0.6;
+    background: black;
+    padding: 10px 0 10px 0;
+    border-radius: 8px;
+    text-align: center;
+    display:none;
+}
+#iconClock{
+    position:absolute;left: 27px;top: 71px;
+    cursor: pointer;
+}
+
+#iconClock img{
+    width:22px;height:22px
+}
