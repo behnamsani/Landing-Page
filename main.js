@@ -27,10 +27,12 @@ let minutesLeft=0;
 let hoursLeft=0;
 let targetDate=[nowDay,nowMonth,nowYear];
 let targetTime=[nowHours,nowMinutes,nowSeconds];
+let decSecond;
 console.log(nowDay,nowMonth,nowYear);
 console.log(nowHours,nowMinutes,nowSeconds);
 
 ok.addEventListener("click",()=>{
+    clearInterval(decSecond);
     const tDay = selectDay.value;
     const tMonth = selectMonth.value;
     const tYear = selectYear.value;
@@ -203,8 +205,9 @@ function timeLeft(day){
 }
 
 function timer(){
-
-    const decSecond=setInterval(()=>{
+    
+    clearInterval(decSecond);
+    decSecond=setInterval(()=>{
         secondLeft=secondLeft-1;
         if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
             time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
@@ -223,7 +226,7 @@ function timer(){
         }else {
             time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
         }
-        if(secondLeft===0){
+        if(secondLeft<0){
             secondLeft=59;
             minutesLeft=minutesLeft-1;
             if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
@@ -243,7 +246,7 @@ function timer(){
             }else {
                 time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
             }
-            if(minutesLeft===0){
+            if(minutesLeft<0){
                 minutesLeft=59;
                 hoursLeft=hoursLeft-1;
                 if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
@@ -263,7 +266,7 @@ function timer(){
                 }else {
                     time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
                 }
-                if(hoursLeft===0){
+                if(hoursLeft<0){
                     hoursLeft=23;
                     dayLeft=dayLeft-1;
                     if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
@@ -283,7 +286,7 @@ function timer(){
                     }else {
                         time.innerHTML=`${secondLeft} : ${minutesLeft} : ${hoursLeft}    -    ${dayLeft} روز `;
                     }
-                    if(dayLeft===0){
+                    if(dayLeft<0){
                         clearInterval(decSecond);
                         if(secondLeft<10&&minutesLeft<10&&hoursLeft<10){
                             time.innerHTML=`0${secondLeft} : 0${minutesLeft} : 0${hoursLeft}    -    ${dayLeft} روز `;
@@ -400,7 +403,6 @@ function hoursMinutes(time){
     }
     if(nowMinutes <= time[1]){
         minutesLeft=time[1]-nowMinutes;
-        console.log(minutesLeft);
     }
 
 
