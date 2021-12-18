@@ -28,6 +28,7 @@ body{
     justify-content: center;
     position: relative;
     box-shadow: 2px 2px 3px #000;
+    z-index:2;
 }
 #time{
     color: rgb(255, 255, 255);
@@ -64,6 +65,7 @@ body{
 }
 #selectYear{
     border-radius: 8px;
+    outline: none;
 }
 #labelPart1{
     display: flex;
@@ -136,8 +138,8 @@ body{
 }
 #clock{
     position: absolute;
-    top: 95px;
-    z-index: 5;
+    top: 52px;
+    z-index: 0;
     left: 25px;
     margin: auto;
     width: 217px;
@@ -155,7 +157,19 @@ body{
     position:absolute;left: 27px;top: 71px;
     cursor: pointer;
 }
+#iconClock:hover{
+    opacity: 1 !important;
+}
 
 #iconClock img{
     width:22px;height:22px
+}
+#alert{
+    position:absolute;top:-28px;right:0;left: 0;
+    margin:auto; 
+    color: red;
+    background:#ffffff;
+    border:solid 1px red;
+    border-radius:8px;
+    font-family: IRANSans-M;
 }

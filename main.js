@@ -1,4 +1,5 @@
 const time = document.querySelector("#time");
+const main = document.querySelector("#main");
 const boxDate = document.querySelector("#arrivalDate");
 const banner = document.querySelector("#banner");
 const iconClock = document.querySelector("#iconClock");
@@ -38,56 +39,92 @@ let targetDate=[nowDay,nowMonth,nowYear];
 let targetTime=[nowHours,nowMinutes,nowSeconds];
 let decSecond;
 
-
-
-console.log(nowDay,nowMonth,nowYear);
-console.log(nowHours,nowMinutes,nowSeconds);
-
 let watch;
 let watch2;
 let nowClock = clock();
+let valid=false;
+let valid2=false;
 
 iconClock.style.display="none";
-iconClock.addEventListener("mouseover",()=>{
-    setTimeout(()=>{
-
-        pTag.style.display="block";
+iconClock.addEventListener("click",()=>{
+    
         iconClock.style.display="none";
+        pTag.style.display="block";
+        for(let i=0;i<=34;i+=0.001){
+            setTimeout(()=>{
+                pTag.style.transform=`translateY(${i}pt)`;
+            },1);
+        }
         setTimeout(()=>{
-            pTag.style.display="none";
+            for(let i=34;i>=0;i-=0.001){
+                setTimeout(()=>{
+                    pTag.style.transform=`translateY(${i}pt)`;
+                },1);
+            };
+            console.log("object");
             iconClock.style.opacity="1";
             iconClock.style.display="block";
             setTimeout(()=>{
                 iconClock.style.opacity="0.4";
-            },1000);
-        },5000);
-
-    },300);
+            },1700);
+        },6000);
 });
 ok.addEventListener("click",()=>{
-    clearInterval(watch);
-    clearInterval(watch2);
-    clearInterval(decSecond);
-    time.style.webkitTextStroke=" 0.8pt rgb(155, 0, 0)";
-    iconClock.style.display="block";
-    setTimeout(()=>{
-        iconClock.style.opacity="0.4";
-    },1000);
+    
+    
 
-    watch2 = clock2();
-    banner.appendChild(pTag);
+    Validation(selectYear);
+    Validation(selectHours);
+    Validation(selectMinutes);
 
-    const tDay = selectDay.value;
-    const tMonth = selectMonth.value;
-    const tYear = selectYear.value;
+    if(parseInt(selectHours.value)>23 || parseInt(selectHours.value)<1){
+        let mess = document.createElement("p");
+        mess.id="alert";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`ساعت باید بین عدد 1 تا 23 باشد`;
+        selectHours.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectHours.style.outline="none";
+        },5000);
+        valid2=false;
+    }else if(parseInt(selectMinutes.value)>59 || parseInt(selectMinutes.value)<0){
+        let mess = document.createElement("p");
+        mess.id="alert";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`دقیقه باید بین 0 تا 59 باشد`;
+        selectMinutes.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectMinutes.style.outline="none";
+        },5000);
+        valid2=false;
+    }else {valid2=true}
 
-    const tHours =parseInt(selectHours.value);
-    const tMinutes =parseInt(selectMinutes.value);
-    targetDate = [tDay,tMonth,tYear];
-    targetTime = [tHours,tMinutes,secondLeft];
-    console.log(targetDate,targetTime);
-    timeLeft(targetDate);
-    timer();
+    if(valid===true&&valid2===true){
+        clearInterval(watch);
+        clearInterval(watch2);
+        clearInterval(decSecond);
+        time.style.webkitTextStroke=" 0.8pt rgb(155, 0, 0)";
+        iconClock.style.display="block";
+        setTimeout(()=>{
+            iconClock.style.opacity="0.4";
+        },1000);
+
+        watch2 = clock2();
+        main.appendChild(pTag);
+
+        const tDay = selectDay.value;
+        const tMonth = selectMonth.value;
+        const tYear = selectYear.value;
+        const tHours =parseInt(selectHours.value);
+        const tMinutes =parseInt(selectMinutes.value);
+        targetDate = [tDay,tMonth,tYear];
+        targetTime = [tHours,tMinutes,secondLeft];
+        timeLeft(targetDate);
+        timer(); 
+    }
+    
 });
 btnDate.addEventListener("click",()=>{
     boxDate.style.display="block";
@@ -528,3 +565,29 @@ watch = setInterval(()=>{
     
 }
 
+function Validation(inpId){
+    if(inpId.value.length===0){
+        let mess = document.createElement("p");
+        mess.id="alert";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`فیلد های مشخص شده را با عدد پر کنید`;
+        inpId.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            inpId.style.outline="none";
+        },5000);
+        valid=false;
+    }else if(isNaN(inpId.value)){
+        let mess = document.createElement("p");
+        mess.id="alert";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`لطفا فقط عدد وارد نمایید`;
+        inpId.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            inpId.style.outline="none";
+        },5000);
+        valid=false;
+
+    }else {valid=true}
+}
