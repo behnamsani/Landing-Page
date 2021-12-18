@@ -70,8 +70,6 @@ iconClock.addEventListener("click",()=>{
         },6000);
 });
 ok.addEventListener("click",()=>{
-    
-    
 
     Validation(selectYear);
     Validation(selectHours);
@@ -79,29 +77,29 @@ ok.addEventListener("click",()=>{
 
     if(parseInt(selectHours.value)>23 || parseInt(selectHours.value)<1){
         let mess = document.createElement("p");
-        mess.id="alert";
+        mess.id="alert2";
         boxDate.appendChild(mess);
         mess.innerHTML=`ساعت باید بین عدد 1 تا 23 باشد`;
         selectHours.style.outline="solid 2px red";
         setTimeout(()=>{
             mess.style.display="none";
             selectHours.style.outline="none";
-        },5000);
+        },6500);
         valid2=false;
     }else if(parseInt(selectMinutes.value)>59 || parseInt(selectMinutes.value)<0){
         let mess = document.createElement("p");
-        mess.id="alert";
+        mess.id="alert2";
         boxDate.appendChild(mess);
         mess.innerHTML=`دقیقه باید بین 0 تا 59 باشد`;
         selectMinutes.style.outline="solid 2px red";
         setTimeout(()=>{
             mess.style.display="none";
             selectMinutes.style.outline="none";
-        },5000);
+        },6500);
         valid2=false;
-    }else if(parseInt(selectYear.value)>nowYear || parseInt(selectYear.value)<2025 || selectYear.value.length<4 || selectYear.value.length>5)  {
+    }else if(parseInt(selectYear.value)<nowYear || parseInt(selectYear.value)>2027 || selectYear.value.length<4 || selectYear.value.length>5)  {
         let mess = document.createElement("p");
-        mess.id="alert";
+        mess.id="alert2";
         boxDate.appendChild(mess);
         mess.innerHTML=`سال نباید بیشتر از سال 2026 و کمتر از سال جاری باشد`;
         mess.style.fontSize="0.8rem";
@@ -109,7 +107,7 @@ ok.addEventListener("click",()=>{
         setTimeout(()=>{
             mess.style.display="none";
             selectYear.style.outline="none";
-        },5000);
+        },6500);
         valid2=false;
     }else {valid2=true}
   
@@ -136,31 +134,42 @@ ok.addEventListener("click",()=>{
         targetTime = [tHours,tMinutes,secondLeft];
         timeLeft(targetDate);
         timer(); 
+        setTimeout(()=>{
+            let opacity = 0.5;
+            for(let i=0;i<=5000;i++){
+                setTimeout(()=>{
+                    opacity=opacity-0.0001;
+                    boxDate.style.opacity=opacity.toString();
+                },2);
+            }
+            setTimeout(()=>{
+                boxDate.style.display="none";
+            },300);
+        },5000);
     }
-    
 });
 btnDate.addEventListener("click",()=>{
     boxDate.style.display="block";
     let opacity = 0;
-    for(let i=0;i<=1000;i++){
+    for(let i=0;i<=5000;i++){
         setTimeout(()=>{
-            opacity=opacity+0.0005;
+            opacity=opacity+0.0001;
             boxDate.style.opacity=opacity.toString();
-        },10);
+        },2);
     }
 });
+
 btnClose.addEventListener("click",()=>{
     let opacity = 0.5;
-    for(let i=0;i<=1000;i++){
+    for(let i=0;i<=5000;i++){
         setTimeout(()=>{
-            opacity=opacity-0.0005;
+            opacity=opacity-0.0001;
             boxDate.style.opacity=opacity.toString();
-        },10);
+        },2);
     }
     setTimeout(()=>{
         boxDate.style.display="none";
     },300);
-    
 });
 
 
@@ -588,7 +597,7 @@ function Validation(inpId){
         setTimeout(()=>{
             mess.style.display="none";
             inpId.style.outline="none";
-        },5000);
+        },6000);
         valid=false;
     }else if(isNaN(inpId.value)){
         let mess = document.createElement("p");
@@ -599,7 +608,7 @@ function Validation(inpId){
         setTimeout(()=>{
             mess.style.display="none";
             inpId.style.outline="none";
-        },5000);
+        },6000);
         valid=false;
 
     }else {valid=true}

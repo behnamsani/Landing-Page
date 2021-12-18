@@ -165,7 +165,16 @@ body{
     width:22px;height:22px
 }
 #alert{
-    position:absolute;top:-28px;right:0;left: 0;
+    position:absolute;top:-32px;right:0;left: 0;
+    margin:auto; 
+    color: red;
+    background:#ffffff;
+    border:solid 1px red;
+    border-radius:8px;
+    font-family: IRANSans-M;
+}
+#alert2{
+    position:absolute;top:-59px;right:0;left: 0;
     margin:auto; 
     color: red;
     background:#ffffff;
