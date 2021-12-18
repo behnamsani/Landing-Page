@@ -99,7 +99,20 @@ ok.addEventListener("click",()=>{
             selectMinutes.style.outline="none";
         },5000);
         valid2=false;
+    }else if(parseInt(selectYear.value)>nowYear || parseInt(selectYear.value)<2025 || selectYear.value.length<4 || selectYear.value.length>5)  {
+        let mess = document.createElement("p");
+        mess.id="alert";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`سال نباید بیشتر از سال 2026 و کمتر از سال جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectYear.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectYear.style.outline="none";
+        },5000);
+        valid2=false;
     }else {valid2=true}
+  
 
     if(valid===true&&valid2===true){
         clearInterval(watch);
