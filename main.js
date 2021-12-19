@@ -195,7 +195,6 @@ btnDate.addEventListener("click",()=>{
         },2);
     }
 });
-
 btnClose.addEventListener("click",()=>{
     let opacity = 0.5;
     for(let i=0;i<=5000;i++){

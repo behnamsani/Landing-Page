@@ -102,6 +102,8 @@ body{
     font-family: IRANSans-M;
     border-radius: 8px;
     cursor: pointer;
+    display: flex;
+    justify-content:center;align-items: center;
 }
 #btnDate:hover{
     background-image: linear-gradient(rgb(48, 47, 47),rgb(216, 216, 216));
@@ -181,4 +183,9 @@ body{
     border:solid 1px red;
     border-radius:8px;
     font-family: IRANSans-M;
+}
+#iSetting{
+    width:16px;height:16px;
+    display:block;
+    margin:0 0 0 5px;
 }
