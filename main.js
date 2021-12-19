@@ -17,6 +17,7 @@ const btnClose = document.querySelector("#close");
 
 const date = new Date();
 const monthArr=[1,-2,1,0,1,0,1,1,0,1,0,1];
+const threeArr=[4,6,9,11];
 const nowYear = date.getFullYear();
 const nowMonth = date.getMonth()+1;
 const nowDay = date.getDate();
@@ -44,6 +45,7 @@ let watch2;
 let nowClock = clock();
 let valid=false;
 let valid2=false;
+let valid3=true;
 
 iconClock.style.display="none";
 iconClock.addEventListener("click",()=>{
@@ -97,7 +99,7 @@ ok.addEventListener("click",()=>{
             selectMinutes.style.outline="none";
         },6500);
         valid2=false;
-    }else if(parseInt(selectYear.value)<nowYear || parseInt(selectYear.value)>2027 || selectYear.value.length<4 || selectYear.value.length>5)  {
+    }else if(parseInt(selectYear.value)<nowYear || parseInt(selectYear.value)>2026){
         let mess = document.createElement("p");
         mess.id="alert2";
         boxDate.appendChild(mess);
@@ -110,9 +112,44 @@ ok.addEventListener("click",()=>{
         },6500);
         valid2=false;
     }else {valid2=true}
-  
 
-    if(valid===true&&valid2===true){
+    if(parseInt(selectDay.value)===31){
+        for(let i=0;i<threeArr.length;i++){
+            if(parseInt(selectMonth.value)===threeArr[i]){
+                let mess = document.createElement("p");
+                mess.id="alert2";
+                boxDate.appendChild(mess);
+                mess.innerHTML=`این ماه سی روز دارد`;
+                mess.style.fontSize="1rem";
+                selectDay.style.outline="solid 2px red";
+                setTimeout(()=>{
+                    mess.style.display="none";
+                    selectDay.style.outline="none";
+                },6500);
+                valid3=false;
+                break;
+            }else{
+                valid3=true;
+            }
+        }
+    }else if(parseInt(selectMonth.value)===2){
+        if(parseInt(selectDay.value)>28){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`این ماه 28 روز دارد`;
+            mess.style.fontSize="1rem";
+            selectDay.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectDay.style.outline="none";
+            },6500);
+            valid3=false;
+        }else {valid3=true}
+    }else{valid3=true}
+  
+    
+    if(valid===true && valid2===true && valid3===true){
         clearInterval(watch);
         clearInterval(watch2);
         clearInterval(decSecond);
@@ -145,7 +182,7 @@ ok.addEventListener("click",()=>{
             setTimeout(()=>{
                 boxDate.style.display="none";
             },300);
-        },5000);
+        },500);
     }
 });
 btnDate.addEventListener("click",()=>{
