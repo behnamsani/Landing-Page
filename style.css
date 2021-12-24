@@ -10,12 +10,13 @@ body{
     height: 100%;
     background:#eee;
     margin: 0;
+    overflow-y: hidden;
 }
 .txt{
     direction: rtl;
     text-align: right;
     font-family: IRANSans-B;
-    margin-left: 30px;
+    margin: 25px 350px 25px 0;
 }
 #banner{
     position: relative;
@@ -25,7 +26,7 @@ body{
     color: azure;
     text-shadow: 2px 2px 3px #000;
     font-size: 1.5rem;
-    justify-content: center;
+    justify-content:flex-end;
     position: relative;
     box-shadow: 2px 2px 3px #000;
     z-index:2;
@@ -37,6 +38,10 @@ body{
     -webkit-text-stroke: 0.8pt rgb(155, 0, 0);
     -webkit-text-fill-color: rgb(255, 255, 255);
     position: absolute;top: 3px;left:0;
+    margin:25px;    
+}
+#boxTime{
+    text-align: center;
 }
 #arrivalDate{
     display: none;
@@ -92,22 +97,6 @@ body{
     justify-content: center;
 }
 
-#btnDate{
-    position: absolute;right:0;top: 0;bottom: 0;
-    margin:auto;
-    padding:0 15px;
-    background-image: linear-gradient(rgb(61, 61, 61),rgb(199, 199, 199));
-    border:none;
-    color:antiquewhite;
-    font-family: IRANSans-M;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content:center;align-items: center;
-}
-#btnDate:hover{
-    background-image: linear-gradient(rgb(48, 47, 47),rgb(216, 216, 216));
-}
 #close{
     position:absolute; right:8px; top: 8px;
     color:red;
@@ -184,8 +173,78 @@ body{
     border-radius:8px;
     font-family: IRANSans-M;
 }
-#iSetting{
+
+.bor{
+    border-top:solid 3px #ffffff;
+    border-bottom:solid 3px #ffffff;
+    display:block;
+    width:40px;
+    height:0;
+    position:relative ;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+#menu{
+    text-align: center;
+    display: flex;justify-content: center;align-items: center;
+    order: 1;
+    position: relative;right: 30px;
+}
+#iconMenu{
+    cursor: pointer;
+}
+#navMenu{
+    width:150px;
+    display:none;
+    opacity: 0;
+    direction: rtl;
+    margin:0;
+    padding: 0;
+    background: rgb(46, 46, 46,0.4);
+    text-align: right;
+}
+#masterMenu{
+    width:100%;height:100%;
+    display: flex;justify-content:end;
+}
+#item{
+    display: block;
+    padding:0;
+    margin:0;
+}
+.subMenu{
+    display:flex;
+    list-style: none;
+    padding: 12px 10px;
+    margin:0;
+    color:rgb(255, 255, 255);
+    font-family: IRANSans-M;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.subMenu:hover{
+    background:rgba(39, 39, 39, 0.4);
+}
+.iconMenu{
     width:16px;height:16px;
     display:block;
-    margin:0 0 0 5px;
+    margin:4px 0 0 4px;
 }
+#bor4{
+    position: relative;top: 27px;
+}
+.triangle {
+    display: none;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border: 9px solid transparent;
+    border-top: 0;
+    border-bottom: 12px solid rgb(37, 37, 37,0.5);
+    position: absolute;
+    z-index: 6;
+    top: 83px;
+    right: 62px;
+  }

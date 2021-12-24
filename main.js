@@ -3,6 +3,13 @@ const main = document.querySelector("#main");
 const boxDate = document.querySelector("#arrivalDate");
 const banner = document.querySelector("#banner");
 const iconClock = document.querySelector("#iconClock");
+const iconMenu = document.querySelector("#iconMenu");
+const bor = document.querySelector(".bor");
+const navMenu = document.querySelector("#navMenu");
+const bor1 = document.querySelector("#bor1");
+const bor2 = document.querySelector("#bor2");
+const bor3 = document.querySelector("#bor3");
+const tri = document.querySelector(".triangle");
 
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
@@ -46,6 +53,12 @@ let nowClock = clock();
 let valid=false;
 let valid2=false;
 let valid3=true;
+let showMenu=false;
+
+const heightHeader = 100;
+banner.style.height=heightHeader;
+let heightMenu = window.outerHeight - heightHeader;
+navMenu.style.height=`${heightMenu}px`;
 
 iconClock.style.display="none";
 iconClock.addEventListener("click",()=>{
@@ -207,6 +220,128 @@ btnClose.addEventListener("click",()=>{
         boxDate.style.display="none";
     },300);
 });
+iconMenu.addEventListener("click",()=>{
+    if(showMenu===false){
+        navMenu.style.display="block";
+        let opacity = 0;
+        let moveY = 0;
+        let sclX = 0;
+       let op= setInterval(() => {
+            opacity=opacity+0.01;
+            navMenu.style.opacity=opacity.toString();
+            if(opacity>0.99){
+                clearInterval(op);
+            }
+        }, 15);
+        //--------------------------------------------
+        let op1 = setInterval(() => {
+            moveY = moveY+1;
+            bor3.style.transform=`translateY(${moveY.toString()}px)`;
+            if(moveY>36){
+                clearInterval(op1);
+            }
+        }, 10);
+        let op2 = setInterval(() => {
+            moveY = moveY+1;
+            bor2.style.transform=`translateY(${moveY.toString()}px)`;
+            if(moveY>48){
+                clearInterval(op2);
+            }
+        }, 10);
+        let op3 = setInterval(() => {
+            moveY = moveY+1;
+            bor1.style.transform=`translateY(${moveY.toString()}px)`;
+            if(moveY>59){
+                clearInterval(op3);
+            }
+        }, 10);
+        let bor4=document.createElement("span");
+        bor4.id="bor4";
+        bor4.classList.add("bor");
+        setTimeout(() => {
+            iconMenu.appendChild(bor4);   
+        }, 250);
+        if(showMenu===false){
+            let opc=0
+            setTimeout(() => {
+                tri.style.display="block";
+                let op4= setInterval(()=>{
+                    sclX=sclX+0.1
+                    opc=opc+0.04;
+                    bor4.style.transform=`scale(${sclX})`;
+                    tri.style.opacity=`${opc}`;
+                    console.log(sclX);
+                    if(sclX>2.5){
+                        clearInterval(op4);
+                    }
+                },10);
+               
+            }, 50);
+        }
+        showMenu=true;
+    }else{
+        const bor4 = document.querySelector("#bor4");
+        let opacity = 1;
+        let moveY3 = 36;
+        let moveY2 = 48;
+        let moveY1 = 59;
+        let sclX = 2.5;
+        let op= setInterval(() => {
+             opacity=opacity-0.01;
+             navMenu.style.opacity=opacity.toString();
+             if(opacity<0.01){
+                 clearInterval(op);
+                 navMenu.style.opacity="0";
+                 navMenu.style.display="none";
+             }
+         }, 10);
+         //---------------------------------------------------
+        if(showMenu===true){
+            let opc=1;
+            let op4= setInterval(()=>{
+                sclX=sclX-0.1
+                opc=opc-0.04;
+                bor4.style.transform=`scale(${sclX})`;
+                tri.style.opacity=`${opc}`;
+                console.log(sclX);
+                if(sclX<0){
+                    clearInterval(op4);
+                }
+            },10);
+        }
+        setTimeout(()=>{
+            bor4.remove();
+            tri.style.display="none";
+        },230)
+        
+        let op1 = setInterval(() => {
+            moveY3 = moveY3-1;
+            bor3.style.transform=`translateY(${moveY3.toString()}px)`;
+            if(moveY3<1){
+                clearInterval(op1);
+            }
+        }, 10);
+        let op2 = setInterval(() => {
+            moveY2 = moveY2-1;
+            bor2.style.transform=`translateY(${moveY2.toString()}px)`;
+            if(moveY2<1){
+                clearInterval(op2);
+            }
+        }, 10);
+        let op3 = setInterval(() => {
+            moveY1 = moveY1-1;
+            bor1.style.transform=`translateY(${moveY1.toString()}px)`;
+            if(moveY1<1){
+                clearInterval(op3);
+            }
+        }, 10);
+        
+        
+         showMenu=false;
+    }
+   
+})
+
 
 
 function timeLeft(day){
@@ -342,7 +477,6 @@ function timeLeft(day){
     
 
 }
-
 function timer(){
     
     clearInterval(decSecond);
@@ -451,7 +585,6 @@ function timer(){
         }
     },1000);
 }
-
 function daysLeft(day){
     
     if(nowDay > parseInt(day[0])){
@@ -499,7 +632,6 @@ function daysLeft(day){
     }
     return dayLeft;
 }
-
 function monthHeigh(day){
 
             let res=0;
@@ -534,7 +666,6 @@ function monthHeigh(day){
                 }
             }
 }
-
 function hoursMinutes(time){
     if(nowMinutes > time[1]){
         minutesLeft= nowMinutes-time[1];
@@ -622,7 +753,6 @@ watch = setInterval(()=>{
     },1000);
     
 }
-
 function Validation(inpId){
     if(inpId.value.length===0){
         let mess = document.createElement("p");
@@ -649,3 +779,84 @@ function Validation(inpId){
 
     }else {valid=true}
 }
+function convertDate(arrDate){
+    let temp =arrDate[2]-1400;
+    let tarYear=2022+temp;
+    const strM=arrDate[1].toString();
+    const strD=arrDate[0].toString();
+    const numMd=parseInt(strM+strD);
+    const chYear=1010;
+    if(numMd>chYear){
+        tarYear=tarYear;
+    }else{
+        tarYear=tarYear-1;
+    }
+    const searchM = {
+
+        11:[01,02,11],
+        12:[02,03,09],
+        01:[03,04,11],
+        02:[04,05,10],
+        03:[05,06,10],
+        04:[06,07,09],
+        05:[07,08,09],
+        06:[08,09,09],
+        07:[09,10,08],
+        08:[10,11,09],
+        09:[11,12,09],
+        10:[12,01,10],
+        
+    }
+    let tarMonth ;
+    let box= searchM[arrDate[1]];
+    if(arrDate[0]>box[2]){
+        tarMonth=box[1];
+    }else{
+        tarMonth=box[0];
+    }
+//---------------------------------------------
+    let tarDay;
+    if(arrDate[0]>box[2]){
+        let temp = arrDate[0]-box[2];
+        tarDay=temp;
+    }else{
+        let temp2= monthArr[tarMonth-1];
+        if(temp2===1){
+            temp2=31;
+        }else if(temp2===0){
+            temp2=30
+        }else{
+            temp2=28;
+        }
+        let temp = box[2]-arrDate[0];
+        temp = temp2-temp;
+        tarDay=temp;
+    }
+     
+    const tarDate=[tarDay,tarMonth,tarYear];
+    console.log(`${tarDay}/${tarMonth}/${tarYear}`);
+    return tarDate;
+   
+}
+
+
+//documents:
+//2020 = [1398-1399];
+//2021 = [1399,1400]; 20/3
+//2011 = [1389,1390];
+
+//
+//1400 = [2021-2022]; 10/10
+
+//1-January = [10/10,11/11];
+//2-February = [11/11,9/12];[11/11,10/12];
+//3-March = [9/12,11/01];[30/12];
+//4-April = [11/01,10/02];
+//5-May = [10/02,10/03];
+//6-June = [10/03,09/04];
+//7-July = [09/04,09/05];
+//8-August = [09/05,09/06];
+//9-September = [09/06,08/07];
+//10-October = [08/07,09/08];
+//11-November = [09/08,09/09];
+//12-December = [09/09,10/10];

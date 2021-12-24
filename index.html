@@ -8,7 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-
     <div id="main">
         
         <div id="arrivalDate">
@@ -100,14 +99,23 @@
         </div>
 
         <header id="banner">
-            <button id="btnDate">تنظیمات <img src="./images/settings-4-16.png" id="iSetting"/></button>
-            <p id="time" class="txt">33 : 48 : 09  -  09 روز </p>
+            <div id="menu">
+                <div id="iconMenu">
+                    <span id="bor1" class="bor"></span>
+                    <span id="bor2" class="bor"></span>
+                    <span id="bor3" class="bor"></span>
+                </div>
+            </div>
+            <div id="boxTime">
+                <p id="time" class="txt">33 : 48 : 09  -  09 روز </p>
+            </div>
             <p class="txt"> <span> 50% </span> درصد تخفیف واقعی ویژه بلک فرایدی </p>
             <div id="iconClock">
                 <img src="./images/calendar.svg" alt="calendar">
                 <img src="./images/clock.svg" alt="clock">
             </div>
         </header>
+        
         <content id="content">
             
         </content>
@@ -118,8 +126,14 @@
     </div>
 
 
-
-
+    <div id="masterMenu">
+        <menu id="navMenu"> 
+            <ul id="item">
+                <li class="subMenu" id="btnDate"> <img src="./images/settings-4-16.png" class="iconMenu" /> تاریخ شگفت انگیز </li>
+            </ul>
+        </menu>
+        <div class="triangle"></div>
+    </div>
     <script src="/main.js"></script>
 </body>
 </html>
