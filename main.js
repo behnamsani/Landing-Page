@@ -349,7 +349,7 @@ iconMenu.addEventListener("click",()=>{
             setTimeout(() => {
                 tri.style.display="block";
                 tri.style.position="absolute";
-                tri.style.right="12px";
+                tri.style.right="8px";
                 let op4= setInterval(()=>{
                     if(smallMenuPo===true){
                         sclX=sclX+0.1;
@@ -464,11 +464,11 @@ btnSmall.addEventListener("click",()=>{
         tri1.style.transform="rotate(270deg)";
         tri1.classList.add("moveMenu");
         const bor4 = document.querySelector("#bor4");
-        bor4.style.right="-26pt";
+        bor4.style.right="-29pt";
         bor4.style.width="21px";
         bor4.classList.add("moveMenu");
 
-        tri.style.right="-34px";
+        tri.style.right="-39px";
         tri.classList.add("moveMenu");
 
         iconMenu1.style.width="25px";
@@ -490,9 +490,9 @@ btnSmall.addEventListener("click",()=>{
         tri1.style.transform="rotate(90deg)"
         const bor4 = document.querySelector("#bor4");
         bor4.classList.add("moveMenu");
-        bor4.style.right="-4pt";
+        bor4.style.right="-7pt";
         bor4.style.width="61px";
-        tri.style.right="12px";
+        tri.style.right="8px";
         iconMenu1.style.width="16px";
         iconMenu1.style.height="16px";
         smallMenuPo=false;
@@ -865,18 +865,75 @@ function clock(){
 clearInterval(watch);
 watch = setInterval(()=>{
     secondPlus=secondPlus+1;
-    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && minutesPlus <10){
+        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10 && hoursPlus <10){
+        time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && hoursPlus <10){
+        time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10){
+        time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10){
+        time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(hoursPlus<10){
+        time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }
+    
     if(secondPlus>59){
         secondPlus=0;
         minutesPlus=minutesPlus+1;
-        time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+            time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10 && minutesPlus <10){
+            time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(minutesPlus<10 && hoursPlus <10){
+            time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10 && hoursPlus <10){
+            time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10){
+            time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(minutesPlus<10){
+            time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(hoursPlus<10){
+            time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }
         if(minutesPlus>59){
             minutesPlus=0;
             hoursPlus=hoursPlus+1;
-            time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+                time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10 && minutesPlus <10){
+                time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(minutesPlus<10 && hoursPlus <10){
+                time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10 && hoursPlus <10){
+                time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10){
+                time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(minutesPlus<10){
+                time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(hoursPlus<10){
+                time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }
             if(hoursPlus>23){
                 hoursPlus=0;
-                time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+                    time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10 && minutesPlus <10){
+                    time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(minutesPlus<10 && hoursPlus <10){
+                    time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10 && hoursPlus <10){
+                    time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10){
+                    time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(minutesPlus<10){
+                    time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(hoursPlus<10){
+                    time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }
             }
         }
 
@@ -886,24 +943,94 @@ watch = setInterval(()=>{
 }
  function clock2(){
     
-    pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && minutesPlus <10){
+        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10 && hoursPlus <10){
+        pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && hoursPlus <10){
+        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10){
+        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10){
+        pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(hoursPlus<10){
+        pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }
     pTag.style.webkitTextStroke=" 0.4pt rgb(92, 56, 255)";
     pTag.style.webkitTextFillColor="#fff";
     clearInterval(watch);
     watch = setInterval(()=>{
     secondPlus=secondPlus+1;
-    pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && minutesPlus <10){
+        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10 && hoursPlus <10){
+        pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10 && hoursPlus <10){
+        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(secondPlus<10){
+        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(minutesPlus<10){
+        pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else if(hoursPlus<10){
+        pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }
     if(secondPlus>59){
         secondPlus=0;
         minutesPlus=minutesPlus+1;
-        pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+            pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10 && minutesPlus <10){
+            pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(minutesPlus<10 && hoursPlus <10){
+            pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10 && hoursPlus <10){
+            pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(secondPlus<10){
+            pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(minutesPlus<10){
+            pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else if(hoursPlus<10){
+            pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }
         if(minutesPlus>59){
             minutesPlus=0;
             hoursPlus=hoursPlus+1;
-            pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+                pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10 && minutesPlus <10){
+                pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(minutesPlus<10 && hoursPlus <10){
+                pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10 && hoursPlus <10){
+                pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(secondPlus<10){
+                pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(minutesPlus<10){
+                pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else if(hoursPlus<10){
+                pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }
             if(hoursPlus>23){
                 hoursPlus=0;
-                pTag.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+                    pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10 && minutesPlus <10){
+                    pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(minutesPlus<10 && hoursPlus <10){
+                    pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10 && hoursPlus <10){
+                    pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(secondPlus<10){
+                    pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(minutesPlus<10){
+                    pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else if(hoursPlus<10){
+                    pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }
             }
         }
 
