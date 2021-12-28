@@ -202,6 +202,10 @@ body{
     padding: 0;
     background: rgb(46, 46, 46,0.4);
     text-align: right;
+    position: relative;
+}
+.moveMenu{
+    transition: all 500ms ease-in-out;
 }
 #masterMenu{
     width:100%;height:100%;
@@ -233,18 +237,54 @@ body{
     margin:4px 0 0 4px;
 }
 #bor4{
-    position: relative;top: 27px;
+    position: absolute;top: 85px;right: -4pt;   
+    width: 61px;
+    border-top:solid 3px #ffffff;
+    border-bottom:solid 3px #ffffff;
+    display:block;
+    height:0;
+    border-radius: 5px;
+    margin-bottom: 5px;
 }
 .triangle {
     display: none;
     opacity: 0;
     width: 0;
     height: 0;
-    border: 9px solid transparent;
+    border: 7px solid transparent;
     border-top: 0;
-    border-bottom: 12px solid rgb(37, 37, 37,0.5);
+    border-bottom: 10px solid rgb(37, 37, 37,0.5);
     position: absolute;
     z-index: 6;
     top: 83px;
     right: 62px;
+  }
+  #small{
+      width: 15px;height: 85px;
+      background: #ffffff;
+      position: absolute;
+      right: 135px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 2px 1px 6px rgb(41, 41, 41);
+  }
+  .triangle1 {
+    display: block;
+    opacity: 1;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top: 0;
+    border-bottom: 10px solid rgb(37, 37, 37,0.5);
+    position: absolute;
+    z-index: 6;
+    top: 40px;
+    right: 1px;
+    transform: rotate(90deg);
+  }
+  .txtMenu{
+      margin: 0;
   }

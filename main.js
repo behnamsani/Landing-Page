@@ -4,12 +4,16 @@ const boxDate = document.querySelector("#arrivalDate");
 const banner = document.querySelector("#banner");
 const iconClock = document.querySelector("#iconClock");
 const iconMenu = document.querySelector("#iconMenu");
+const iconMenu1 = document.querySelector(".iconMenu");
 const bor = document.querySelector(".bor");
 const navMenu = document.querySelector("#navMenu");
 const bor1 = document.querySelector("#bor1");
 const bor2 = document.querySelector("#bor2");
 const bor3 = document.querySelector("#bor3");
 const tri = document.querySelector(".triangle");
+const tri1 = document.querySelector(".triangle1");
+const txtMenu = document.querySelector(".txtMenu");
+const btnSmall = document.querySelector("#small");
 
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
@@ -53,7 +57,9 @@ let nowClock = clock();
 let valid=false;
 let valid2=false;
 let valid3=true;
+let valid4=false;
 let showMenu=false;
+let smallMenuPo=false;
 
 const heightHeader = 100;
 banner.style.height=heightHeader;
@@ -159,10 +165,74 @@ ok.addEventListener("click",()=>{
             },6500);
             valid3=false;
         }else {valid3=true}
-    }else{valid3=true}
+    }else(valid3=true);
+    console.log(nowYear);
+    console.log( parseInt(selectYear.value));
+    console.log( parseInt(selectMonth.value));
+    if( nowYear > parseInt(selectYear.value)){
+        let mess = document.createElement("p");
+        mess.id="alert2";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`سال نمی تواند کوچکتر از سال جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectYear.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectYear.style.outline="none";
+        },6500);
+        valid4=false;
+    }else if (nowYear === parseInt(selectYear.value) && nowMonth > parseInt(selectMonth.value)){
+        let mess = document.createElement("p");
+        mess.id="alert2";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`ماه نمی تواند کوچکتر از ماه جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectMonth.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectMonth.style.outline="none";
+        },6500);
+        valid4=false;
+    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay > parseInt(selectDay.value)){
+        let mess = document.createElement("p");
+        mess.id="alert2";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`روز نمی تواند کوچکتر از روز جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectDay.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectDay.style.outline="none";
+        },6500);
+        valid4=false;
+    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours > parseInt(selectHours.value)){
+        let mess = document.createElement("p");
+        mess.id="alert2";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`ساعت نمی تواند کوچکتر از ساعت جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectHours.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectHours.style.outline="none";
+        },6500);
+        valid4=false;
+    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours === parseInt(selectHours.value) && nowMinutes > parseInt(selectMinutes.value)){
+        let mess = document.createElement("p");
+        mess.id="alert2";
+        boxDate.appendChild(mess);
+        mess.innerHTML=`دقیقه نمی تواند کوچکتر از دقیقه جاری باشد`;
+        mess.style.fontSize="0.8rem";
+        selectMinutes.style.outline="solid 2px red";
+        setTimeout(()=>{
+            mess.style.display="none";
+            selectMinutes.style.outline="none";
+        },6500);
+        valid4=false;
+    }else{valid4=true}
   
     
-    if(valid===true && valid2===true && valid3===true){
+    if(valid===true && valid2===true && valid3===true && valid4===true){
         clearInterval(watch);
         clearInterval(watch2);
         clearInterval(decSecond);
@@ -221,13 +291,16 @@ btnClose.addEventListener("click",()=>{
     },300);
 });
 iconMenu.addEventListener("click",()=>{
+    navMenu.classList.remove("moveMenu");
+    tri.classList.remove("moveMenu");
     if(showMenu===false){
         navMenu.style.display="block";
         let opacity = 0;
+        let opacity1 = 1;
         let moveY = 0;
         let sclX = 0;
        let op= setInterval(() => {
-            opacity=opacity+0.01;
+            opacity=opacity+0.02;
             navMenu.style.opacity=opacity.toString();
             if(opacity>0.99){
                 clearInterval(op);
@@ -237,57 +310,84 @@ iconMenu.addEventListener("click",()=>{
         let op1 = setInterval(() => {
             moveY = moveY+1;
             bor3.style.transform=`translateY(${moveY.toString()}px)`;
+            opacity1=opacity1-0.02;
+            bor3.style.opacity=`${opacity1.toString()}`;
             if(moveY>36){
                 clearInterval(op1);
+                bor3.style.opacity=`0`;
             }
-        }, 10);
+        }, 12);
         let op2 = setInterval(() => {
             moveY = moveY+1;
             bor2.style.transform=`translateY(${moveY.toString()}px)`;
+            opacity1=opacity1-0.02;
+            bor2.style.opacity=`${opacity1.toString()}`;
             if(moveY>48){
                 clearInterval(op2);
+                bor2.style.opacity=`0`;
             }
-        }, 10);
+        }, 12);
         let op3 = setInterval(() => {
             moveY = moveY+1;
             bor1.style.transform=`translateY(${moveY.toString()}px)`;
+            opacity1=opacity1-0.02;
+            bor1.style.opacity=`${opacity1.toString()}`;
             if(moveY>59){
                 clearInterval(op3);
+                bor1.style.opacity=`0`;
             }
-        }, 10);
+        }, 12);
         let bor4=document.createElement("span");
         bor4.id="bor4";
-        bor4.classList.add("bor");
+        bor4.style.borderRadius="2px";
         setTimeout(() => {
-            iconMenu.appendChild(bor4);   
-        }, 250);
+            iconMenu.appendChild(bor4);
+            bor4.classList.remove("moveMenu");  
+        }, 260);
         if(showMenu===false){
             let opc=0
             setTimeout(() => {
                 tri.style.display="block";
+                tri.style.position="absolute";
+                tri.style.right="12px";
                 let op4= setInterval(()=>{
-                    sclX=sclX+0.1
+                    if(smallMenuPo===true){
+                        sclX=sclX+0.1;
+                        bor4.style.width=`21px`;
+                        bor4.style.right="-26pt";
+                        tri.style.right="-34px";
+                    }else {sclX=sclX+0.1}
                     opc=opc+0.04;
                     bor4.style.transform=`scale(${sclX})`;
                     tri.style.opacity=`${opc}`;
-                    console.log(sclX);
-                    if(sclX>2.5){
-                        clearInterval(op4);
+                    if(smallMenuPo===true){
+                        if(sclX>2.5){
+                            clearInterval(op4);
+                        }
+                    }else{
+                        if(sclX>2.5){
+                            clearInterval(op4);
+                        }
                     }
+                   
                 },10);
                
             }, 50);
         }
         showMenu=true;
+        console.log(navMenu.attributes);
     }else{
+        navMenu.classList.remove("moveMenu");
         const bor4 = document.querySelector("#bor4");
+        bor4.classList.remove("moveMenu");
         let opacity = 1;
+        let opacity1 = 0;
         let moveY3 = 36;
         let moveY2 = 48;
         let moveY1 = 59;
         let sclX = 2.5;
         let op= setInterval(() => {
-             opacity=opacity-0.01;
+             opacity=opacity-0.03;
              navMenu.style.opacity=opacity.toString();
              if(opacity<0.01){
                  clearInterval(op);
@@ -300,23 +400,25 @@ iconMenu.addEventListener("click",()=>{
             let opc=1;
             let op4= setInterval(()=>{
                 sclX=sclX-0.1
-                opc=opc-0.04;
+                opc=opc-0.06;
                 bor4.style.transform=`scale(${sclX})`;
                 tri.style.opacity=`${opc}`;
-                console.log(sclX);
                 if(sclX<0){
                     clearInterval(op4);
+                    
                 }
             },10);
         }
         setTimeout(()=>{
             bor4.remove();
             tri.style.display="none";
-        },230)
+        },450)
         
         let op1 = setInterval(() => {
             moveY3 = moveY3-1;
             bor3.style.transform=`translateY(${moveY3.toString()}px)`;
+            opacity1=opacity1+0.03;
+            bor3.style.opacity=`${opacity1.toString()}`;
             if(moveY3<1){
                 clearInterval(op1);
             }
@@ -324,6 +426,8 @@ iconMenu.addEventListener("click",()=>{
         let op2 = setInterval(() => {
             moveY2 = moveY2-1;
             bor2.style.transform=`translateY(${moveY2.toString()}px)`;
+            opacity1=opacity1+0.025;
+            bor2.style.opacity=`${opacity1.toString()}`;
             if(moveY2<1){
                 clearInterval(op2);
             }
@@ -331,13 +435,68 @@ iconMenu.addEventListener("click",()=>{
         let op3 = setInterval(() => {
             moveY1 = moveY1-1;
             bor1.style.transform=`translateY(${moveY1.toString()}px)`;
+            opacity1=opacity1+0.025;
+            bor1.style.opacity=`${opacity1.toString()}`;
             if(moveY1<1){
                 clearInterval(op3);
             }
         }, 10);
         
-        
+        console.log(navMenu.attributes);
          showMenu=false;
+    }
+   
+})
+btnSmall.addEventListener("click",()=>{
+    if(smallMenuPo===false){
+        navMenu.style.width="50px";
+        navMenu.classList.add("moveMenu");
+        console.log(navMenu.attributes);
+
+        setTimeout(()=>{
+            txtMenu.style.display="none";
+        },90);
+        txtMenu.classList.add("moveMenu");
+
+        btnSmall.style.right="35px";
+        btnSmall.classList.add("moveMenu");
+
+        tri1.style.transform="rotate(270deg)";
+        tri1.classList.add("moveMenu");
+        const bor4 = document.querySelector("#bor4");
+        bor4.style.right="-26pt";
+        bor4.style.width="21px";
+        bor4.classList.add("moveMenu");
+
+        tri.style.right="-34px";
+        tri.classList.add("moveMenu");
+
+        iconMenu1.style.width="25px";
+        iconMenu1.style.height="25px";
+        iconMenu1.classList.add("moveMenu");
+        smallMenuPo=true;
+    }else{
+        navMenu.classList.add("moveMenu");
+        iconMenu1.classList.add("moveMenu");
+        tri.classList.add("moveMenu");
+        tri1.classList.add("moveMenu");
+        navMenu.style.width="150px";
+        setTimeout(()=>{
+            txtMenu.style.display="block";
+            txtMenu.classList.add("moveMenu");
+        },480);
+        
+        btnSmall.style.right="135px"
+        tri1.style.transform="rotate(90deg)"
+        const bor4 = document.querySelector("#bor4");
+        bor4.classList.add("moveMenu");
+        bor4.style.right="-4pt";
+        bor4.style.width="61px";
+        tri.style.right="12px";
+        iconMenu1.style.width="16px";
+        iconMenu1.style.height="16px";
+        smallMenuPo=false;
+        console.log(navMenu.attributes[1].value.split(";").splice(4,1));
     }
    
 })
