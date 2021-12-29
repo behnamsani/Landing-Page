@@ -61,9 +61,9 @@ let valid4=false;
 let showMenu=false;
 let smallMenuPo=false;
 
-const heightHeader = 100;
-banner.style.height=heightHeader;
-let heightMenu = window.outerHeight - heightHeader;
+const heightHeader = 112;
+banner.style.height=`${heightHeader}px`;
+let heightMenu = window.innerHeight - heightHeader;
 navMenu.style.height=`${heightMenu}px`;
 
 iconClock.style.display="none";
@@ -375,7 +375,6 @@ iconMenu.addEventListener("click",()=>{
             }, 50);
         }
         showMenu=true;
-        console.log(navMenu.attributes);
     }else{
         navMenu.classList.remove("moveMenu");
         const bor4 = document.querySelector("#bor4");
@@ -862,28 +861,9 @@ function hoursMinutes(time){
 function clock(){
     time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
     time.style.webkitTextStroke=" 0.8pt rgb(92, 56, 255)";
-clearInterval(watch);
-watch = setInterval(()=>{
-    secondPlus=secondPlus+1;
-    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && minutesPlus <10){
-        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10 && hoursPlus <10){
-        time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && hoursPlus <10){
-        time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10){
-        time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10){
-        time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(hoursPlus<10){
-        time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }
-    
-    if(secondPlus>59){
-        secondPlus=0;
-        minutesPlus=minutesPlus+1;
+    clearInterval(watch);
+    watch = setInterval(()=>{
+        secondPlus=secondPlus+1;
         if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
             time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
         }else if(secondPlus<10 && minutesPlus <10){
@@ -898,10 +878,13 @@ watch = setInterval(()=>{
             time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
         }else if(hoursPlus<10){
             time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else{
+            time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
         }
-        if(minutesPlus>59){
-            minutesPlus=0;
-            hoursPlus=hoursPlus+1;
+        
+        if(secondPlus>59){
+            secondPlus=0;
+            minutesPlus=minutesPlus+1;
             if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
                 time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
             }else if(secondPlus<10 && minutesPlus <10){
@@ -916,9 +899,12 @@ watch = setInterval(()=>{
                 time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
             }else if(hoursPlus<10){
                 time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else{
+                time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
             }
-            if(hoursPlus>23){
-                hoursPlus=0;
+            if(minutesPlus>59){
+                minutesPlus=0;
+                hoursPlus=hoursPlus+1;
                 if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
                     time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
                 }else if(secondPlus<10 && minutesPlus <10){
@@ -933,13 +919,34 @@ watch = setInterval(()=>{
                     time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
                 }else if(hoursPlus<10){
                     time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else{
+                    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }
+                if(hoursPlus>23){
+                    hoursPlus=0;
+                    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
+                        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(secondPlus<10 && minutesPlus <10){
+                        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(minutesPlus<10 && hoursPlus <10){
+                        time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(secondPlus<10 && hoursPlus <10){
+                        time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(secondPlus<10){
+                        time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(minutesPlus<10){
+                        time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else if(hoursPlus<10){
+                        time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }else{
+                        time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    }
                 }
             }
+        
         }
 
-    }
-
-},1000);
+    },1000);
 }
  function clock2(){
     
@@ -957,6 +964,8 @@ watch = setInterval(()=>{
         pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
     }else if(hoursPlus<10){
         pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else{
+        pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
     }
     pTag.style.webkitTextStroke=" 0.4pt rgb(92, 56, 255)";
     pTag.style.webkitTextFillColor="#fff";
@@ -977,6 +986,8 @@ watch = setInterval(()=>{
         pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
     }else if(hoursPlus<10){
         pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+    }else{
+        pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
     }
     if(secondPlus>59){
         secondPlus=0;
@@ -995,6 +1006,8 @@ watch = setInterval(()=>{
             pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
         }else if(hoursPlus<10){
             pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+        }else{
+            pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
         }
         if(minutesPlus>59){
             minutesPlus=0;
@@ -1013,6 +1026,8 @@ watch = setInterval(()=>{
                 pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
             }else if(hoursPlus<10){
                 pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            }else{
+                pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
             }
             if(hoursPlus>23){
                 hoursPlus=0;
@@ -1030,6 +1045,8 @@ watch = setInterval(()=>{
                     pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
                 }else if(hoursPlus<10){
                     pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                }else{
+                    pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
                 }
             }
         }
