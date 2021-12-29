@@ -4,7 +4,7 @@ const boxDate = document.querySelector("#arrivalDate");
 const banner = document.querySelector("#banner");
 const iconClock = document.querySelector("#iconClock");
 const iconMenu = document.querySelector("#iconMenu");
-const iconMenu1 = document.querySelector(".iconMenu");
+const iconMenu1 = document.querySelectorAll(".iconMenu");
 const bor = document.querySelector(".bor");
 const navMenu = document.querySelector("#navMenu");
 const bor1 = document.querySelector("#bor1");
@@ -12,8 +12,11 @@ const bor2 = document.querySelector("#bor2");
 const bor3 = document.querySelector("#bor3");
 const tri = document.querySelector(".triangle");
 const tri1 = document.querySelector(".triangle1");
-const txtMenu = document.querySelector(".txtMenu");
+const txtMenu = document.querySelectorAll(".txtMenu");
 const btnSmall = document.querySelector("#small");
+const shams = document.querySelector("#shams");
+const toggle = document.querySelector("#toggle");
+const txtShams = document.querySelector("#txtShams");
 
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
@@ -28,6 +31,7 @@ const btnClose = document.querySelector("#close");
 
 const date = new Date();
 const monthArr=[1,-2,1,0,1,0,1,1,0,1,0,1];
+const monthArrSh=[1,1,1,1,1,1,0,0,0,0,0,-1];
 const threeArr=[4,6,9,11];
 const nowYear = date.getFullYear();
 const nowMonth = date.getMonth()+1;
@@ -53,13 +57,15 @@ let decSecond;
 
 let watch;
 let watch2;
-let nowClock = clock();
+let nowClock = clock([nowDay,nowMonth,nowYear],time,"0.8pt");
 let valid=false;
 let valid2=false;
 let valid3=true;
 let valid4=false;
 let showMenu=false;
 let smallMenuPo=false;
+let btnShams=false;
+let setOk=false;
 
 const heightHeader = 112;
 banner.style.height=`${heightHeader}px`;
@@ -91,7 +97,8 @@ iconClock.addEventListener("click",()=>{
         },6000);
 });
 ok.addEventListener("click",()=>{
-
+    
+    setOk = true;
     Validation(selectYear);
     Validation(selectHours);
     Validation(selectMinutes);
@@ -231,7 +238,8 @@ ok.addEventListener("click",()=>{
         valid4=false;
     }else{valid4=true}
   
-    
+    //*************************************************************************************
+
     if(valid===true && valid2===true && valid3===true && valid4===true){
         clearInterval(watch);
         clearInterval(watch2);
@@ -242,7 +250,7 @@ ok.addEventListener("click",()=>{
             iconClock.style.opacity="0.4";
         },1000);
 
-        watch2 = clock2();
+        watch2 = clock([nowDay,nowMonth,nowYear],pTag,"0.4pt");
         main.appendChild(pTag);
 
         const tDay = selectDay.value;
@@ -448,14 +456,18 @@ iconMenu.addEventListener("click",()=>{
 })
 btnSmall.addEventListener("click",()=>{
     if(smallMenuPo===false){
+        if(btnShams===true){
+            toggle.style.transform="translateX(-15px)";
+        }
         navMenu.style.width="50px";
         navMenu.classList.add("moveMenu");
-        console.log(navMenu.attributes);
 
         setTimeout(()=>{
-            txtMenu.style.display="none";
+            txtMenu[0].style.display="none";
+            txtMenu[1].style.display="none";
         },90);
-        txtMenu.classList.add("moveMenu");
+        txtMenu[0].classList.add("moveMenu");
+        txtMenu[1].classList.add("moveMenu");
 
         btnSmall.style.right="35px";
         btnSmall.classList.add("moveMenu");
@@ -470,19 +482,33 @@ btnSmall.addEventListener("click",()=>{
         tri.style.right="-39px";
         tri.classList.add("moveMenu");
 
-        iconMenu1.style.width="25px";
-        iconMenu1.style.height="25px";
-        iconMenu1.classList.add("moveMenu");
+        iconMenu1[0].style.width="25px";
+        shams.style.width="30px";
+        iconMenu1[0].style.height="25px";
+        shams.style.height="15px";
+        shams.style.marginLeft="0";
+        iconMenu1[0].classList.add("moveMenu");
+        shams.classList.add("moveMenu");
+        toggle.style.width="15px";
+        toggle.style.height="15px";
+        toggle.classList.add("moveMenu");
         smallMenuPo=true;
     }else{
+        if(btnShams===true){
+            toggle.style.transform="translateX(-20px)";
+            console.log("ok");
+        }
         navMenu.classList.add("moveMenu");
-        iconMenu1.classList.add("moveMenu");
+        iconMenu1[0].classList.add("moveMenu");
+        shams.classList.add("moveMenu");
         tri.classList.add("moveMenu");
         tri1.classList.add("moveMenu");
         navMenu.style.width="150px";
         setTimeout(()=>{
-            txtMenu.style.display="block";
-            txtMenu.classList.add("moveMenu");
+            txtMenu[0].style.display="block";
+            txtMenu[1].style.display="block";
+            txtMenu[0].classList.add("moveMenu");
+            txtMenu[1].classList.add("moveMenu");
         },480);
         
         btnSmall.style.right="135px"
@@ -492,12 +518,66 @@ btnSmall.addEventListener("click",()=>{
         bor4.style.right="-7pt";
         bor4.style.width="61px";
         tri.style.right="8px";
-        iconMenu1.style.width="16px";
-        iconMenu1.style.height="16px";
+        iconMenu1[0].style.width="16px";
+        shams.style.width="40px";
+        iconMenu1[0].style.height="16px";
+        shams.style.height="20px";
+        shams.style.marginLeft="10px";
+        toggle.style.width="20px";
+        toggle.style.height="20px";
+        toggle.classList.add("moveMenu");
         smallMenuPo=false;
-        console.log(navMenu.attributes[1].value.split(";").splice(4,1));
     }
    
+})
+toggle.addEventListener("click",()=>{
+    if(setOk===false){
+        if(btnShams===false){
+            if(smallMenuPo===false){
+                toggle.style.transform="translateX(-20px)";
+            }else{
+                toggle.style.transform="translateX(-15px)";
+            }
+            shams.style.background="green";
+            txtShams.style.color="rgb(145, 235, 103)";
+    
+            // const dateArr = time.innerText.split("-")[1].split("/");
+            // const dateArr1=[parseInt(dateArr[0]),parseInt(dateArr[1]),parseInt(dateArr[2]),];
+            const tempDate=[nowDay,nowMonth,nowYear];
+            clock(convertDateToSh(tempDate),time,"0.8pt");
+            btnShams=true;
+        }else if(btnShams===true){
+            toggle.style.transform="translateX(0)";
+            shams.style.background="rgb(199, 46, 46)";
+            txtShams.style.color="rgb(255, 255, 255)";
+            const tempDate=[nowDay,nowMonth,nowYear];
+            clock(tempDate,time,"0.8pt");
+            btnShams=false;
+        }
+    }else if(setOk===true){
+        if(btnShams===false){
+            if(smallMenuPo===false){
+                toggle.style.transform="translateX(-20px)";
+            }else{
+                toggle.style.transform="translateX(-15px)";
+            }
+            shams.style.background="green";
+            txtShams.style.color="rgb(145, 235, 103)";
+    
+            // const dateArr = time.innerText.split("-")[1].split("/");
+            // const dateArr1=[parseInt(dateArr[0]),parseInt(dateArr[1]),parseInt(dateArr[2]),];
+            const tempDate=[nowDay,nowMonth,nowYear];
+            clock(convertDateToSh(tempDate),pTag,"0.4pt");
+            btnShams=true;
+        }else if(btnShams===true){
+            toggle.style.transform="translateX(0)";
+            shams.style.background="rgb(199, 46, 46)";
+            txtShams.style.color="rgb(255, 255, 255)";
+            const tempDate=[nowDay,nowMonth,nowYear];
+            clock(tempDate,pTag,"0.4pt");
+            btnShams=false;
+        }
+    }
 })
 
 
@@ -858,88 +938,89 @@ function hoursMinutes(time){
     }
 
 }
-function clock(){
-    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    time.style.webkitTextStroke=" 0.8pt rgb(92, 56, 255)";
+function clock(arr,vari,stroke){
+    vari.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
+    vari.style.webkitTextStroke=`${stroke} rgb(92, 56, 255)`;
+    vari.style.webkitTextFillColor="#fff";
     clearInterval(watch);
     watch = setInterval(()=>{
         secondPlus=secondPlus+1;
         if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-            time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(secondPlus<10 && minutesPlus <10){
-            time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(minutesPlus<10 && hoursPlus <10){
-            time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(secondPlus<10 && hoursPlus <10){
-            time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(secondPlus<10){
-            time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(minutesPlus<10){
-            time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else if(hoursPlus<10){
-            time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }else{
-            time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+            vari.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
         }
         
         if(secondPlus>59){
             secondPlus=0;
             minutesPlus=minutesPlus+1;
             if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-                time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(secondPlus<10 && minutesPlus <10){
-                time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(minutesPlus<10 && hoursPlus <10){
-                time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(secondPlus<10 && hoursPlus <10){
-                time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(secondPlus<10){
-                time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(minutesPlus<10){
-                time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else if(hoursPlus<10){
-                time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }else{
-                time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                vari.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
             }
             if(minutesPlus>59){
                 minutesPlus=0;
                 hoursPlus=hoursPlus+1;
                 if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-                    time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(secondPlus<10 && minutesPlus <10){
-                    time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(minutesPlus<10 && hoursPlus <10){
-                    time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(secondPlus<10 && hoursPlus <10){
-                    time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(secondPlus<10){
-                    time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(minutesPlus<10){
-                    time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else if(hoursPlus<10){
-                    time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }else{
-                    time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                    vari.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                 }
                 if(hoursPlus>23){
                     hoursPlus=0;
                     if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-                        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(secondPlus<10 && minutesPlus <10){
-                        time.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(minutesPlus<10 && hoursPlus <10){
-                        time.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(secondPlus<10 && hoursPlus <10){
-                        time.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(secondPlus<10){
-                        time.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(minutesPlus<10){
-                        time.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else if(hoursPlus<10){
-                        time.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }else{
-                        time.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
+                        vari.innerHTML=`${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${arr[0]} / ${arr[1]} / ${arr[2]}`;
                     }
                 }
             }
@@ -947,114 +1028,6 @@ function clock(){
         }
 
     },1000);
-}
- function clock2(){
-    
-    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && minutesPlus <10){
-        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10 && hoursPlus <10){
-        pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && hoursPlus <10){
-        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10){
-        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10){
-        pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(hoursPlus<10){
-        pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else{
-        pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }
-    pTag.style.webkitTextStroke=" 0.4pt rgb(92, 56, 255)";
-    pTag.style.webkitTextFillColor="#fff";
-    clearInterval(watch);
-    watch = setInterval(()=>{
-    secondPlus=secondPlus+1;
-    if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && minutesPlus <10){
-        pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10 && hoursPlus <10){
-        pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10 && hoursPlus <10){
-        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(secondPlus<10){
-        pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(minutesPlus<10){
-        pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else if(hoursPlus<10){
-        pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }else{
-        pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-    }
-    if(secondPlus>59){
-        secondPlus=0;
-        minutesPlus=minutesPlus+1;
-        if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-            pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(secondPlus<10 && minutesPlus <10){
-            pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(minutesPlus<10 && hoursPlus <10){
-            pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(secondPlus<10 && hoursPlus <10){
-            pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(secondPlus<10){
-            pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(minutesPlus<10){
-            pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else if(hoursPlus<10){
-            pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }else{
-            pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-        }
-        if(minutesPlus>59){
-            minutesPlus=0;
-            hoursPlus=hoursPlus+1;
-            if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-                pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(secondPlus<10 && minutesPlus <10){
-                pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(minutesPlus<10 && hoursPlus <10){
-                pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(secondPlus<10 && hoursPlus <10){
-                pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(secondPlus<10){
-                pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(minutesPlus<10){
-                pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else if(hoursPlus<10){
-                pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }else{
-                pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-            }
-            if(hoursPlus>23){
-                hoursPlus=0;
-                if(secondPlus<10 && minutesPlus <10 && hoursPlus <10){
-                    pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(secondPlus<10 && minutesPlus <10){
-                    pTag.innerHTML=`0${secondPlus} : 0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(minutesPlus<10 && hoursPlus <10){
-                    pTag.innerHTML=`${secondPlus} : 0${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(secondPlus<10 && hoursPlus <10){
-                    pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(secondPlus<10){
-                    pTag.innerHTML=`0${secondPlus} : ${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(minutesPlus<10){
-                    pTag.innerHTML=`${secondPlus} :0${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else if(hoursPlus<10){
-                    pTag.innerHTML=`${secondPlus} :${minutesPlus} : 0${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }else{
-                    pTag.innerHTML=`${secondPlus} :${minutesPlus} : ${hoursPlus}   -   ${nowDay} / ${nowMonth} / ${nowYear}`;
-                }
-            }
-        }
-
-    }
-
-    },1000);
-    
 }
 function Validation(inpId){
     if(inpId.value.length===0){
@@ -1082,7 +1055,7 @@ function Validation(inpId){
 
     }else {valid=true}
 }
-function convertDate(arrDate){
+function convertDateToMi(arrDate){
     let temp =arrDate[2]-1400;
     let tarYear=2022+temp;
     const strM=arrDate[1].toString();
@@ -1141,11 +1114,73 @@ function convertDate(arrDate){
     return tarDate;
    
 }
+function convertDateToSh(arrDate){
+    let temp =arrDate[2]-2021;
+    let tarYear=1400+temp;
+    const strM=arrDate[1].toString();
+    const strD=arrDate[0].toString();
+    const numMd=parseInt(strM+strD);
+    const chYear=320;
+    if(numMd>chYear){
+        tarYear=tarYear;
+    }else{
+        tarYear=tarYear-1;
+    }
+
+    const searchM = {
+
+        04:[01,02,20],
+        05:[02,03,21],
+        06:[03,04,21],
+        07:[04,05,22],
+        08:[05,06,22],
+        09:[06,07,22],
+        10:[07,08,22],
+        11:[08,09,21],
+        12:[09,10,21],
+        01:[10,11,20],
+        02:[11,12,19],
+        03:[12,01,20],
+        
+    }
+    let tarMonth ;
+    let box= searchM[arrDate[1]];
+    if(arrDate[0]>box[2]){
+        tarMonth=box[1];
+    }else{
+        tarMonth=box[0];
+    }
+
+    //---------------------------------------------
+
+    let tarDay;
+    if(arrDate[0]>box[2]){
+        let temp = arrDate[0]-box[2];
+        tarDay=temp;
+    }else{
+        let temp2= monthArrSh[tarMonth-1];
+        if(temp2===1){
+            temp2=31;
+        }else if(temp2===0){
+            temp2=30
+        }else{
+            temp2=29;
+        }
+        let temp = box[2]-arrDate[0];
+        temp = temp2-temp;
+        tarDay=temp;
+    }
+    
+    const tarDate=[tarDay,tarMonth,tarYear];
+    const tarDateFinal=`${tarYear}/${tarMonth}/${tarDay}`;
+    return tarDate;
+}
 
 
 //documents:
 //2020 = [1398-1399];
 //2021 = [1399,1400]; 20/3
+//2022 = [1400,1401]; 20/3
 //2011 = [1389,1390];
 
 //
@@ -1153,6 +1188,7 @@ function convertDate(arrDate){
 
 //1-January = [10/10,11/11];
 //2-February = [11/11,9/12];[11/11,10/12];
+
 //3-March = [9/12,11/01];[30/12];
 //4-April = [11/01,10/02];
 //5-May = [10/02,10/03];

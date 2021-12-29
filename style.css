@@ -64,7 +64,7 @@
         top: 90px !important;
     }
     #clock{
-        top: 65px !important;
+        top: 67px !important;
     }
     
 }
@@ -194,7 +194,7 @@ body{
 }
 #clock{
     position: absolute;
-    top: 52px;
+    top: 67px;
     z-index: 0;
     left: 25px;
     margin: auto;
@@ -359,3 +359,25 @@ body{
       width: 100%;
       margin-right: 75px;
   }
+  #shams{
+      width: 40px;height: 20px;
+      background:rgb(199, 46, 46);
+      border-radius: 50px;
+      position: relative;
+      z-index: 10;
+      margin-left: 10px;
+      transition: background 300ms ease-in-out;
+  }
+  #toggle{
+      display:block;
+      position: absolute;
+      width: 20px;height:20px;
+      background:rgb(255, 255, 255);
+      border-radius: 50px;
+      z-index: 11;
+      transition: transform 300ms ease-in-out;
+  }
+  #txtShams{
+    transition: color 300ms ease-in-out;
+}
+  
