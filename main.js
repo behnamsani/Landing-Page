@@ -62,6 +62,7 @@ let valid=false;
 let valid2=false;
 let valid3=true;
 let valid4=false;
+let valid5=false;
 let showMenu=false;
 let smallMenuPo=false;
 let btnShams=false;
@@ -99,6 +100,226 @@ iconClock.addEventListener("click",()=>{
 ok.addEventListener("click",()=>{
     
     setOk = true;
+
+    if(btnShams===true){
+        let tempDate=[nowDay,nowMonth,nowYear];
+        tempDate= convertDateToSh(tempDate);
+        const nowDaySh=tempDate[0];
+        const nowMonthSh=tempDate[1];
+        const nowYearSh=tempDate[2];
+
+        let shamsDay=parseInt(selectDay.value);
+        console.log(shamsDay);
+        if(parseInt(selectDay.value)===31){
+            for(let i=0;i<monthArrSh.length;i++){
+                console.log(parseInt(selectMonth.value-1));
+                if(monthArrSh[parseInt(selectMonth.value-1)]===0){
+                    let mess = document.createElement("p");
+                    mess.id="alert2";
+                    boxDate.appendChild(mess);
+                    mess.innerHTML=`این ماه سی روز دارد`;
+                    mess.style.fontSize="1rem";
+                    selectDay.style.outline="solid 2px red";
+                    setTimeout(()=>{
+                        mess.style.display="none";
+                        selectDay.style.outline="none";
+                    },6500);
+                    valid5=false;
+                    break;
+                }else{
+                    valid5=true;
+                }
+            }
+        }else if(parseInt(selectMonth.value)===12){
+            if(parseInt(selectDay.value)>29){
+                let mess = document.createElement("p");
+                mess.id="alert2";
+                boxDate.appendChild(mess);
+                mess.innerHTML=`این ماه 29 روز دارد`;
+                mess.style.fontSize="1rem";
+                selectDay.style.outline="solid 2px red";
+                setTimeout(()=>{
+                    mess.style.display="none";
+                    selectDay.style.outline="none";
+                },6500);
+                valid5=false;
+            }else {valid5=true}
+        }else{valid5=true};
+
+        if( nowYearSh > parseInt(selectYear.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`سال نمی تواند کوچکتر از سال جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectYear.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectYear.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYearSh === parseInt(selectYear.value) && nowMonthSh > parseInt(selectMonth.value)){
+            console.log(nowMonth);
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`ماه نمی تواند کوچکتر از ماه جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectMonth.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectMonth.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYearSh === parseInt(selectYear.value) && nowMonthSh === parseInt(selectMonth.value) && nowDaySh > parseInt(selectDay.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`روز نمی تواند کوچکتر از روز جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectDay.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectDay.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYearSh === parseInt(selectYear.value) && nowMonthSh === parseInt(selectMonth.value) && nowDaySh === parseInt(selectDay.value) && nowHours > parseInt(selectHours.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`ساعت نمی تواند کوچکتر از ساعت جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectHours.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectHours.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYearSh === parseInt(selectYear.value) && nowMonthSh === parseInt(selectMonth.value) && nowDaySh === parseInt(selectDay.value) && nowHours === parseInt(selectHours.value) && nowMinutes > parseInt(selectMinutes.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`دقیقه نمی تواند کوچکتر از دقیقه جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectMinutes.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectMinutes.style.outline="none";
+            },6500);
+            valid4=false;
+        }else{valid4=true}
+        //************************************************************************************************/
+        if(valid4===true && valid5===true){
+            const shamsArray = convertDateToMi([parseInt(selectDay.value),parseInt(selectMonth.value),parseInt(selectYear.value)]);
+            selectYear.value=shamsArray[2].toString();
+            selectMonth.value=shamsArray[1].toString();
+            selectDay.value=shamsArray[0].toString();
+        }
+        
+    }
+    
+    
+
+    if(btnShams===false){
+        console.log("shams false");
+        if(parseInt(selectDay.value)===31 && parseInt(selectMonth.value)!=2){
+            for(let i=0;i<threeArr.length;i++){
+                if(parseInt(selectMonth.value)===threeArr[i]){
+                    let mess = document.createElement("p");
+                    mess.id="alert2";
+                    boxDate.appendChild(mess);
+                    mess.innerHTML=`این ماه سی روز دارد`;
+                    mess.style.fontSize="1rem";
+                    selectDay.style.outline="solid 2px red";
+                    setTimeout(()=>{
+                        mess.style.display="none";
+                        selectDay.style.outline="none";
+                    },6500);
+                    valid3=false;
+                    break;
+                }else{
+                    valid3=true;
+                }
+            }
+        }else if(parseInt(selectMonth.value)===2){
+            if(parseInt(selectDay.value)>28){
+                let mess = document.createElement("p");
+                mess.id="alert2";
+                boxDate.appendChild(mess);
+                mess.innerHTML=`این ماه 28 روز دارد`;
+                mess.style.fontSize="1rem";
+                selectDay.style.outline="solid 2px red";
+                setTimeout(()=>{
+                    mess.style.display="none";
+                    selectDay.style.outline="none";
+                },6500);
+                valid3=false;
+            }else {valid3=true}
+        }else(valid3=true);
+
+        if( nowYear > parseInt(selectYear.value) && btnShams===false){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`سال نمی تواند کوچکتر از سال جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectYear.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectYear.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYear === parseInt(selectYear.value) && nowMonth > parseInt(selectMonth.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`ماه نمی تواند کوچکتر از ماه جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectMonth.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectMonth.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay > parseInt(selectDay.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`روز نمی تواند کوچکتر از روز جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectDay.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectDay.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours > parseInt(selectHours.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`ساعت نمی تواند کوچکتر از ساعت جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectHours.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectHours.style.outline="none";
+            },6500);
+            valid4=false;
+        }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours === parseInt(selectHours.value) && nowMinutes > parseInt(selectMinutes.value)){
+            let mess = document.createElement("p");
+            mess.id="alert2";
+            boxDate.appendChild(mess);
+            mess.innerHTML=`دقیقه نمی تواند کوچکتر از دقیقه جاری باشد`;
+            mess.style.fontSize="0.8rem";
+            selectMinutes.style.outline="solid 2px red";
+            setTimeout(()=>{
+                mess.style.display="none";
+                selectMinutes.style.outline="none";
+            },6500);
+            valid4=false;
+        }else{valid4=true}
+    }
+    
     Validation(selectYear);
     Validation(selectHours);
     Validation(selectMinutes);
@@ -125,122 +346,13 @@ ok.addEventListener("click",()=>{
             selectMinutes.style.outline="none";
         },6500);
         valid2=false;
-    }else if(parseInt(selectYear.value)<nowYear || parseInt(selectYear.value)>2026){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`سال نباید بیشتر از سال 2026 و کمتر از سال جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectYear.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectYear.style.outline="none";
-        },6500);
-        valid2=false;
+    
     }else {valid2=true}
-
-    if(parseInt(selectDay.value)===31){
-        for(let i=0;i<threeArr.length;i++){
-            if(parseInt(selectMonth.value)===threeArr[i]){
-                let mess = document.createElement("p");
-                mess.id="alert2";
-                boxDate.appendChild(mess);
-                mess.innerHTML=`این ماه سی روز دارد`;
-                mess.style.fontSize="1rem";
-                selectDay.style.outline="solid 2px red";
-                setTimeout(()=>{
-                    mess.style.display="none";
-                    selectDay.style.outline="none";
-                },6500);
-                valid3=false;
-                break;
-            }else{
-                valid3=true;
-            }
-        }
-    }else if(parseInt(selectMonth.value)===2){
-        if(parseInt(selectDay.value)>28){
-            let mess = document.createElement("p");
-            mess.id="alert2";
-            boxDate.appendChild(mess);
-            mess.innerHTML=`این ماه 28 روز دارد`;
-            mess.style.fontSize="1rem";
-            selectDay.style.outline="solid 2px red";
-            setTimeout(()=>{
-                mess.style.display="none";
-                selectDay.style.outline="none";
-            },6500);
-            valid3=false;
-        }else {valid3=true}
-    }else(valid3=true);
-    console.log(nowYear);
-    console.log( parseInt(selectYear.value));
-    console.log( parseInt(selectMonth.value));
-    if( nowYear > parseInt(selectYear.value)){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`سال نمی تواند کوچکتر از سال جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectYear.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectYear.style.outline="none";
-        },6500);
-        valid4=false;
-    }else if (nowYear === parseInt(selectYear.value) && nowMonth > parseInt(selectMonth.value)){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`ماه نمی تواند کوچکتر از ماه جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectMonth.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectMonth.style.outline="none";
-        },6500);
-        valid4=false;
-    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay > parseInt(selectDay.value)){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`روز نمی تواند کوچکتر از روز جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectDay.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectDay.style.outline="none";
-        },6500);
-        valid4=false;
-    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours > parseInt(selectHours.value)){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`ساعت نمی تواند کوچکتر از ساعت جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectHours.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectHours.style.outline="none";
-        },6500);
-        valid4=false;
-    }else if (nowYear === parseInt(selectYear.value) && nowMonth === parseInt(selectMonth.value) && nowDay === parseInt(selectDay.value) && nowHours === parseInt(selectHours.value) && nowMinutes > parseInt(selectMinutes.value)){
-        let mess = document.createElement("p");
-        mess.id="alert2";
-        boxDate.appendChild(mess);
-        mess.innerHTML=`دقیقه نمی تواند کوچکتر از دقیقه جاری باشد`;
-        mess.style.fontSize="0.8rem";
-        selectMinutes.style.outline="solid 2px red";
-        setTimeout(()=>{
-            mess.style.display="none";
-            selectMinutes.style.outline="none";
-        },6500);
-        valid4=false;
-    }else{valid4=true}
   
     //*************************************************************************************
+    
 
-    if(valid===true && valid2===true && valid3===true && valid4===true){
+    if(valid===true && valid2===true && valid3===true && valid4===true && valid5===true){
         clearInterval(watch);
         clearInterval(watch2);
         clearInterval(decSecond);
@@ -252,6 +364,10 @@ ok.addEventListener("click",()=>{
 
         watch2 = clock([nowDay,nowMonth,nowYear],pTag,"0.4pt");
         main.appendChild(pTag);
+        if(btnShams===true){
+            const tempDate=[nowDay,nowMonth,nowYear];
+            clock(convertDateToSh(tempDate),pTag,"0.4pt");
+        }
 
         const tDay = selectDay.value;
         const tMonth = selectMonth.value;
@@ -545,6 +661,7 @@ toggle.addEventListener("click",()=>{
             // const dateArr1=[parseInt(dateArr[0]),parseInt(dateArr[1]),parseInt(dateArr[2]),];
             const tempDate=[nowDay,nowMonth,nowYear];
             clock(convertDateToSh(tempDate),time,"0.8pt");
+            selectYear.placeholder="1400 - 1405";
             btnShams=true;
         }else if(btnShams===true){
             toggle.style.transform="translateX(0)";
@@ -552,6 +669,7 @@ toggle.addEventListener("click",()=>{
             txtShams.style.color="rgb(255, 255, 255)";
             const tempDate=[nowDay,nowMonth,nowYear];
             clock(tempDate,time,"0.8pt");
+            selectYear.placeholder="2021 - 2026";
             btnShams=false;
         }
     }else if(setOk===true){
