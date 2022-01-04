@@ -220,25 +220,17 @@ body{
 #iconClock img{
     width:22px;height:22px
 }
-#alert{
-    position:absolute;top:-32px;right:0;left: 0;
-    margin:auto; 
+.alert{
+    margin:5px;
+    padding: 5px;
+    display: block;
     color: red;
     background:#ffffff;
     border:solid 1px red;
     border-radius:8px;
     font-family: IRANSans-M;
+    font-size: 0.9rem;
 }
-#alert2{
-    position:absolute;top:-59px;right:0;left: 0;
-    margin:auto; 
-    color: red;
-    background:#ffffff;
-    border:solid 1px red;
-    border-radius:8px;
-    font-family: IRANSans-M;
-}
-
 .bor{
     border-top:solid 4px #ffffff;
     border-bottom:solid 3px #ffffff;
@@ -379,5 +371,18 @@ body{
   }
   #txtShams{
     transition: color 300ms ease-in-out;
+}
+#alertMessage{
+    z-index: 20;
+    background:rgb(39, 39, 39);
+    display:block;
+    height:fit-content;
+    width:max-content;
+    position: absolute;
+    top: -61px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    border-radius:5px
 }
   
