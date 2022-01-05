@@ -385,4 +385,60 @@ body{
     margin: auto;
     border-radius:5px
 }
-  
+#settingBanner{
+    width:250px;height:250px;
+    background:rgb(39, 39, 39,0.7);
+    border-radius: 8px;
+    justify-content:center;
+    position: absolute;
+    top: 0;bottom: 0;
+    right:0;left:0;
+    margin: auto;
+    display:none;
+    opacity:0;
+}
+.inpBanner{
+    outline: none;
+    border:none;
+    margin: 8px 5px;
+    border-radius: 5px;
+}
+#subBanner{
+    text-align: center;
+    margin-top: 20px;
+}
+.sub3 input{
+    width:35px;height:35px;
+    margin:5px 35px;
+}
+.sub2{
+    display: flex;
+}
+.sub2 label{
+    margin:0 25px;
+}
+.labBanner{
+    font-size: 0.7rem;
+    font-family: IRANSans-M;
+    color:#fff;
+}
+.line{
+    width:211px;height:2px;
+    border-radius: 10px;
+    background:azure;
+    display:block;
+    margin:8px 8px;
+}
+#txtBannerSetting{
+    font-size: 0.6rem;
+    width: 150px;
+    height: 24px;
+    font-family: IRANSans-M;
+}
+#btnSettingClose{
+    position: absolute;top: 5px;right: 5px;
+    color: red;
+}
+.btSub{
+    cursor: pointer;
+}

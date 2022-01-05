@@ -140,11 +140,36 @@
                 <li class="subMenu" id="btnDate"> <img src="./images/hourglass.png" class="iconMenu" /> <p class="txtMenu">تاریخ شگفت انگیز</p>  </li>
 
                 <li class="subMenu" id="btnshamsi"> <div id="shams"><span id="toggle"></span> </div><p id="txtShams" class="txtMenu">تاریخ شمسی</p> </li>
+
+                <li class="subMenu" id="btnBanner"> <img src="./images/settings-4-16.png" class="iconMenu" /> <p class="txtMenu">تنظیمات بنر</p>  </li>
             </ul>
             <div id="small">
                 <div class="triangle1"></div>
             </div>
         </menu>
+    </div>
+    <div id="settingBanner">
+        <div id="subBanner">
+            <button class="btSub" id="btnSettingClose"> × </button>
+            <div>
+                <label class="labBanner" id="lab1"> متن بنر :</label>
+                <input class="inpBanner" id="txtBannerSetting" type="text">
+            </div>
+            <span class="line"></span>
+            <div>
+                <div class="sub2">
+                    <label class="labBanner" id="lab2"> رنگ بالای بنر</label>
+                    <label class="labBanner" id="lab3"> رنگ پایین بنر</label>
+                </div>
+                <div class="sub3">
+                    <input class="inpBanner" type="color" id="topGra">
+                    <input class="inpBanner" type="color" id="bottomGra">
+                </div>
+            </div>
+            <div>
+                <button class="btSub" id="okSetting">ok</button>
+            </div>
+        </div>
     </div>
     <script src="/main.js"></script>
 </body>

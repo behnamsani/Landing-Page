@@ -18,6 +18,14 @@ const shams = document.querySelector("#shams");
 const toggle = document.querySelector("#toggle");
 const txtShams = document.querySelector("#txtShams");
 const alertMessage = document.querySelector("#alertMessage");
+const btnBanner = document.querySelector("#btnBanner");
+const settingBanner = document.querySelector("#settingBanner");
+const btnSettingClose= document.querySelector("#btnSettingClose");
+const txtBanner= document.querySelector("#txtBanner");
+const txtBannerSetting= document.querySelector("#txtBannerSetting");
+const okSetting= document.querySelector("#okSetting");
+const topGra= document.querySelector("#topGra");
+const bottomGra= document.querySelector("#bottomGra");
 
 const selectDay = document.querySelector("#selectDay");
 const selectMonth = document.querySelector("#selectMonth");
@@ -155,10 +163,8 @@ ok.addEventListener("click",()=>{
         
     }
     
-    
-
     if(btnShams===false){
-        console.log("shams false");
+        valid5=true;
         if(parseInt(selectDay.value)===31 && parseInt(selectMonth.value)!=2){
             for(let i=0;i<threeArr.length;i++){
                 if(parseInt(selectMonth.value)===threeArr[i]){
@@ -209,7 +215,6 @@ ok.addEventListener("click",()=>{
   
     //*************************************************************************************
     
-
     if(valid===true && valid2===true && valid3===true && valid4===true && valid5===true){
         clearInterval(watch);
         clearInterval(watch2);
@@ -439,9 +444,11 @@ btnSmall.addEventListener("click",()=>{
         setTimeout(()=>{
             txtMenu[0].style.display="none";
             txtMenu[1].style.display="none";
+            txtMenu[2].style.display="none";
         },90);
         txtMenu[0].classList.add("moveMenu");
         txtMenu[1].classList.add("moveMenu");
+        txtMenu[2].classList.add("moveMenu");
 
         btnSmall.style.right="35px";
         btnSmall.classList.add("moveMenu");
@@ -457,11 +464,14 @@ btnSmall.addEventListener("click",()=>{
         tri.classList.add("moveMenu");
 
         iconMenu1[0].style.width="25px";
+        iconMenu1[1].style.width="25px";
         shams.style.width="30px";
         iconMenu1[0].style.height="25px";
+        iconMenu1[1].style.height="25px";
         shams.style.height="15px";
         shams.style.marginLeft="0";
         iconMenu1[0].classList.add("moveMenu");
+        iconMenu1[1].classList.add("moveMenu");
         shams.classList.add("moveMenu");
         toggle.style.width="15px";
         toggle.style.height="15px";
@@ -474,6 +484,7 @@ btnSmall.addEventListener("click",()=>{
         }
         navMenu.classList.add("moveMenu");
         iconMenu1[0].classList.add("moveMenu");
+        iconMenu1[1].classList.add("moveMenu");
         shams.classList.add("moveMenu");
         tri.classList.add("moveMenu");
         tri1.classList.add("moveMenu");
@@ -481,8 +492,10 @@ btnSmall.addEventListener("click",()=>{
         setTimeout(()=>{
             txtMenu[0].style.display="block";
             txtMenu[1].style.display="block";
+            txtMenu[2].style.display="block";
             txtMenu[0].classList.add("moveMenu");
             txtMenu[1].classList.add("moveMenu");
+            txtMenu[2].classList.add("moveMenu");
         },480);
         
         btnSmall.style.right="135px"
@@ -493,8 +506,10 @@ btnSmall.addEventListener("click",()=>{
         bor4.style.width="61px";
         tri.style.right="8px";
         iconMenu1[0].style.width="16px";
+        iconMenu1[1].style.width="16px";
         shams.style.width="40px";
         iconMenu1[0].style.height="16px";
+        iconMenu1[1].style.height="16px";
         shams.style.height="20px";
         shams.style.marginLeft="10px";
         toggle.style.width="20px";
@@ -554,6 +569,37 @@ toggle.addEventListener("click",()=>{
             btnShams=false;
         }
     }
+})
+btnBanner.addEventListener("click",()=>{
+    let opacity=0;
+    let temp = setInterval(() => {
+        settingBanner.style.display="flex";
+        opacity=opacity+0.01;
+        settingBanner.style.opacity=`${opacity}`;
+        if(opacity>=1){
+            clearInterval(temp);
+        }
+    },10);
+    
+});
+btnSettingClose.addEventListener("click",()=>{
+    let opacity=1;
+    let temp = setInterval(() => {
+        settingBanner.style.opacity=`${opacity}`;
+        opacity=opacity-0.01;
+        if(opacity<=0){
+            clearInterval(temp);
+            settingBanner.style.display="none";
+        }
+    },10);
+   
+})
+okSetting.addEventListener("click",()=>{
+    txtBanner.innerHTML= txtBannerSetting.value;
+    let cl1=topGra.value;
+    let cl2=bottomGra.value;
+    console.log(cl1,cl2);
+    banner.style.backgroundImage = `linear-gradient(${cl1},${cl2})`;
 })
 
 
